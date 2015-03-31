@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_update_sequences_invoice_wizard" model="ir.ui.view">
+            <field name="name">Change Sequence Invoice</field>
+            <field name="model">tipo.documento.sequence.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Update Sequences invoice" version="7.0">
+                    <group>
+                        <field name="sequence_id" style="width: 50%%"  />
+                        <field name="next_number" style="width: 20%%" />
+                    </group>
+                    <footer>
+                        <button name="update_sequence" string="Update" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_update_invoice_sequences" model="ir.actions.act_window">
+            <field name="name">Update Sequences invoice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tipo.documento.sequence.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_update_sequences_invoice_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+<!--
+        <act_window id="action_view_update_invoice_sequences"
+                    name="Update Sequences invoice"
+                    src_model="ir.sequence"
+                    res_model="tipo.documento.sequence.wizard"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+-->
+
+    </data>
+</openerp>
