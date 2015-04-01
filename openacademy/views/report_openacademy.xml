@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_curso">  <!-- id= identificador del reporte -->
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                 <!-- <t t-call="report.external_layout">--> <!-- permite llamar al encabezado y pie de pagina-->
+                        <div class="page">
+                            <h2>CURSOS DE ODOO</h2> 
+                            <p>Curso: <span t-field="o.name"/>  </p>
+                            <p>Descripcion: <span t-field="o.description"/></p>
+
+                            <div class="row">Nueva Linea 1</div><!-- tiene 12 columnas-->
+
+                            <div class="row mt8 mb32">Nueva Linea 2</div> 
+
+                            <div  class="row" style="background-color:#568eff;color:#ffffff;">
+
+<div class="col-xs-6 col-xs-offset-3" style="background-color:#000000;color:#ffffff;" > ancho de 6 columnas une 3 columnas</div>
+<div class="col-xs-1 col-xs-pull-1" style="background-color:red;color:#ffffff;">the right</div>
+                            </div>
+
+                            <div class="row">
+                               <div class="col-xs-10" style="text-align:right;border: 1px solid #568eff;">
+                                  <strong>Total:</strong>
+                               </div>
+                               <div class="col-xs-2" style="text-align:right;border: 1px solid #568eff;border-left:0px;">
+                                  <strong>100.00</strong>
+                               </div>
+                            </div>                        
+                        </div>
+                 <!-- </t> -->
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>
+

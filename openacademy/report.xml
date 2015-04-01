@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- QWeb Reports -->
+        <!-- name= noombre_modulo.id_reporte -->
+        <report 
+            id="openacademy_print_curso"
+            model="openacademy.curso"
+            string="Imprimir reporte"
+            report_type="qweb-pdf" 
+            name="openacademy.report_curso"
+            file="openacademy.report_curso"
+        />
+        <!-- formato de hoja -->
+        <record id="paperformat_cursos" model="report.paperformat">
+            <field name="name">Formato hoja impresion cursos</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">100</field>
+            <field name="page_width">200</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">3</field>
+            <field name="dpi">130</field>
+        </record>
+
+        <!--Asociar el reporte al formato de hoja mediante el tributo ref= ref="openacademy.paperformat_cursos" -->
+        <record id="openacademy_print_curso" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="openacademy.paperformat_cursos"/>
+        </record>
+
+    </data>
+</openerp>

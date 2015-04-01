@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Definimos la accion -->
+        <record model="ir.actions.act_window" id="course_list_action">
+            <field name="name">Cursos</field>
+            <field name="res_model">openacademy.curso</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Cree el primer curso</p>
+            </field>
+        </record>
+ 
+        <!-- menu superior o principal: no hereda de otro menu -->
+        <menuitem id="main_openacademy_menu" name="Cursos"/>
+ 
+        <!-- Definimos un menu de solo vista, este menu tiene como menu padre a Cursos -->
+        <menuitem id="openacademy_menu" name="Cursos academicos" parent="main_openacademy_menu"/>
+        <!-- Definimos otro menu que tiene como menu padre a Curso academicos.-->
+        <menuitem id="courses_menu" name="Cursos" parent="openacademy_menu" action="course_list_action"/>
+        
+
+    </data>
+</openerp>
