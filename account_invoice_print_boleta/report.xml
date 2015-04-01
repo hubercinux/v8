@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- QWeb Reports -->
+        <!-- name= noombre_modulo.id_reporte -->
+        <!-- el atributo name y file deben de ser el mismo valor-->
+        <report 
+            id="report_account_invoice_boleta" 
+            model="account.invoice" 
+            name="account_invoice_print_boleta.report_invoice_print_boleta" 
+            string="Boletas" 
+            report_type="qweb-pdf"            
+            file="account_invoice_print_boleta.report_invoice_print_boleta"
+        />
+    
+    <!-- formato de hoja -->
+        <record id="paperformat_invoice_boleta" model="report.paperformat">
+            <field name="name">Formato hoja impresion Boleta</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">100</field>
+            <field name="page_width">200</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">3</field>
+            <field name="dpi">130</field>
+        </record>
+
+        <!--Asociar el reporte al formato de hoja mediante el tributo ref= ref="openacademy.paperformat_cursos" -->
+        <record id="report_account_invoice_boleta" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="account_invoice_print_boleta.paperformat_invoice_boleta"/>
+        </record>
+
+    </data>
+</openerp>
