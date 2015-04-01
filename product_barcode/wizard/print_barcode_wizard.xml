@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+        <record model="ir.ui.view" id="wizard_barcode_form_view">
+            <field name="name">barcode.wizard.form</field>
+            <field name="model">product.barcode.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Imprimir Barcode">
+                    <group col="4" string="Ingrese atributos de impresion">
+                        <field name="col" />
+                        <field name="row" />
+                    </group>
+                    <footer>
+                        <button name="print_barcode" type="object" string="Imprimir" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="launch_barcode_wizard"
+            key2="client_print_multi"
+            name="Print Barcode"
+            res_model="product.barcode.wizard"
+            src_model="product.product"
+            view_mode="form" 
+            target="new" 
+            view_type="form" />
+
+    </data>
+</openerp>

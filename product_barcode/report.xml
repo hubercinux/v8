@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- nuevo cambios-->
+        <!-- atributo name=nombre_modulo.nombre_reporte-->
+        <report id="report_product_barcode" 
+        model="product.product" 
+        name="product_print_barcode.barcode"  
+        string="Codigo de barra" 
+        xml="product_barcode/report/product_barcode.xml" 
+        xsl="product_barcode/report/product_barcode.xsl"/>
+        <!-- fin -->
+
+        <report 
+            id="report_barcode_print" 
+            string="Print barcode product" 
+            model="product.product" 
+            report_type="qweb-pdf" 
+            name="product_barcode.report_barcode_print_template" 
+            file="product_barcode.report_barcode_print_template"
+            menu="False"/>
+
+    </data>
+</openerp>

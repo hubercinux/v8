@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<etikettseite>
+    <produktetikett type="fields" name="id">
+        <code type="field" name="code"/>
+        <product type="field" name="name"/>
+        <price type="field" name="list_price"/>
+        <default_code type="field" name="default_code"/>
+        <currency type="field" name="company_id.currency_id.name"/>
+        <loc_rack type="field" name="loc_rack"/>
+        <loc_row type="field" name="loc_row"/>
+        <loc_case type="field" name="loc_case"/>
+    </produktetikett>
+</etikettseite>
