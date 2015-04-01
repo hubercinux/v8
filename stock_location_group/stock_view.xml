@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    	<!-- Añade el campo group_ids la vista stock_location_from -->
+		<record model="ir.ui.view" id="view_stock_location_group_form">
+			<field name="name">stock.location.group.form</field>
+			<field name="model">stock.location</field>
+			<field name="inherit_id" ref="stock.view_location_form"/>
+			<field name="arch" type="xml">
+				<field name="putaway_strategy_id" position="after">
+					<separator string="Grupos" colspan="4"/>
+					<field name="group_ids" widget="many2many_tags"/>
+				</field>
+			</field>
+		</record>
+
+		<!-- Añade el campo group_ids la vista stock.view_warehouse -->
+		<record model="ir.ui.view" id="view_stock_warehouse_group_form">
+			<field name="name">stock.warehouse.group.form</field>
+			<field name="model">stock.warehouse</field>
+			<field name="inherit_id" ref="stock.view_warehouse"/>
+			<field name="arch" type="xml">
+				<field name="resupply_wh_ids" position="after">
+					<separator string="Grupos" colspan="4"/>
+					<field name="group_ids" widget="many2many_tags"/>
+				</field>
+			</field>
+		</record>
+
+   </data>
+</openerp>
