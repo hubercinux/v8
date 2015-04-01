@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+    <!-- Picking x Ubicaciones  -->
+        <record id="stock_picking_user_rule" model="ir.rule">
+            <field name="name">PICKING x UBICACIONES</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">['|','|','|',('move_lines.location_id','=',False),('move_lines.location_id','in',[x.id for x in user.location_ids]),('move_lines.location_dest_id','in',[x.id for x in user.location_ids]),('move_lines','=',False)]</field>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+    <!-- vista de movimientos x Ubicaciones  -->
+        <record id="stock_move_user_rule" model="ir.rule">
+            <field name="name">MOVIMIENTOS x UBICACIONES</field>
+            <field name="model_id" ref="stock.model_stock_move"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">['|',('location_id','in',[x.id for x in user.location_ids]),('location_dest_id','in',[x.id for x in user.location_ids])]</field>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+
+        <!-- vista Kamban de pincking x Ubicaciones -->
+        <record id="stock_picking_type_user_rule" model="ir.rule">
+            <field name="name">TIPO DE PICKING X UBICACIONES</field>
+            <field name="model_id" ref="stock.model_stock_picking_type"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">['|',('default_location_dest_id','in',[x.id for x in user.location_ids]),('default_location_src_id','in',[x.id for x in user.location_ids])]</field>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_create"/>
+        </record>    
+    </data>
+</openerp>
