@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Es necesario definir este archivo-->
+<templates xml:space="preserve">
+    <!-- t-name: definimos el nombre del template(HomePageTemplate) que sera llamado en tienda_mascota/static/js/tienda_mascota.js-->
+    <t t-name="HomePageTemplate"> 
+        <div style="background-color: red;">Usando Qweb - primer div </div>
+        <div>
+        	<div>HOLA: <t t-esc="name_"/></div>
+             Ingrese nombre mascota: <input type="text" t-att-value="name"/>
+    	</div>
+    </t>
+
+    <t t-name="HomePageTemplate1"> 
+        <div style="background-color: blue;">Usando Qweb - primer div1 </div>
+        <div>
+             Ingrese nombre mascota1: <input type="text" t-att-value="name1"/>
+    	</div>
+    </t>
+
+</templates>

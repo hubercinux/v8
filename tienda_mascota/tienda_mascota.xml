@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- importando los .css y js del mudulo web -->
+        <template id="assets_backend" name="tienda_mascota_assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/tienda_mascota/static/src/css/tienda_mascota.css"/>
+                <script type="text/javascript" src="/tienda_mascota/static/src/js/tienda_mascota.js"/>
+            </xpath>
+        </template>
+
+        <!-- Creando lo menus -->
+        <menuitem id="main_root_tienda_menu" name="Tienda" />
+
+        <menuitem id="tienda_menu" name="Tienda de Mascotas" parent="main_root_tienda_menu" />
+
+         <!-- Creando la accion que sera llamado en tienda_mascota/static/src/js/tienda_mascota.js mediante tag -->
+        <record id="action_home_page" model="ir.actions.client">
+            <field name="name">Tienda de Mascota</field>
+            <field name="tag">tienda_mascota.paginainicio</field>
+        </record>
+
+        <menuitem id="home_page_tienda_menu" name="Mascotas" parent="tienda_menu" action="action_home_page"/>
+
+    </data>
+</openerp>
