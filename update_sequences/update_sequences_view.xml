@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="update_sequences_account_form_inherit" model="ir.ui.view">
+            <field name="name">update.account.invoice.sequences.view.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <button name="%(update_sequences.action_view_update_invoice_sequences)d" string="| Ver Correlativo Fact/Bol" type="action" class="oe_link"  attrs="{'invisible': ['|',('state', '=', 'done'),('journal_id','=',False)]}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

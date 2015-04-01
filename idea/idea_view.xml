@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+		<menuitem id="menu_root"  name="Ideas" sequence="10" />
+
+        <record model="ir.actions.act_window" id="action_list_ideas">
+    		<field name="name">Ideas</field>
+			<field name="res_model">idea.demo</field>
+    		<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="menu_general" parent="menu_root" name="Menu Ideas" />	
+		<menuitem id="menu_ideas" parent="menu_general" name="Ideas" action="action_list_ideas"/>
+		
+		<record model="ir.ui.view" id="view_idea_demo_form"><!--regla tiene que terminar en _form -->
+			<field name='name'>view.idea.demo.form</field>
+    		<field name="model">idea.demo</field>
+    		<field name="arch" type="xml">
+			<form string="Idea form" version="7.0">
+				<header>
+					<button class="oe_highlight" name="confirmar" type="object"  string="Validar" attrs="{'invisible':['|',('state', '=', 'done'),('state', '=', 'cancel')]}"/>
+					<button class="oe_highlight" name="anular" type="object" string="Anular" attrs="{'invisible':[('state', '=', 'cancel'),]}" />
+					<button class="oe_highlight" name="borrador" type="object" string="Borrador" attrs="{'invisible':[('state', '!=', 'cancel')]}" />
+					<field name="state" widget="statusbar"/>
+				</header>
+				<sheet>
+			        <group colspan="2" col="2">
+			            <field name="name" />
+			            <field name="n1"/>
+			            <field name="n2"/>
+			            <field name="operacion"/>
+			            <field name="resultado"/>
+			        </group>
+			        <notebook colspan="4">
+			            <page string="Description">
+			                <field name="description"/>
+			            </page>
+			        </notebook>
+				</sheet>
+			</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="view_idea_demo_tree"><!-- regla tiene que terminar en _tree-->
+                <field name="name">demo.view</field>
+                <field name="model">idea.demo</field>
+                <field name="arch" type="xml">
+                	<tree string="Idea list">
+			    		<field name="name"/>
+			    		<field name="state"/>
+					</tree>
+				</field>
+        </record>
+
+
+   </data>
+</openerp>
