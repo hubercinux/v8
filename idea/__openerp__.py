@@ -27,7 +27,7 @@
 	'sumary' : 'Modulo de odoo para demo',
 	'description' : 'modulo varios demo',
 	'depends' : ['base'],
-	'data' : ['idea_view.xml'],
+	'data' : ['idea_view.xml', 'idea_sequence.xml'],
 	'installable' : True,
 	'aplication' : True,
 	

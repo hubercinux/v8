@@ -38,8 +38,8 @@ class idea_demo(models.Model):
         self.resultado = self.n1 + self.n2
 
     
-    name = fields.Char(string='Nombre', required=True)
-
+    name = fields.Char(string='Nombre', required=True, readonly=True, default='/')
+    cliente_id = cliente = fields.Many2one('res.partner')
     description	= fields.Text('Observacioni')
     n1 = fields.Integer(string='Numero 1')
     n2 = fields.Integer(string='Numero 2')
@@ -67,11 +67,20 @@ class idea_demo(models.Model):
         	raise Warning(_('No puedes eliminar un registo en estado Realizado, debes de Anual primero'))
         return super(idea_demo, self).unlink()
 
-    @api.onchange('name')
-    def onchange_name(self):
+    @api.onchange('cliente_id')
+    def onchange_cliente_id(self):
     	#_logger.error("PINCKING id1: %r", self.name) 
-        if self.name:
-	        self.description = "Estimado %s" % (self.name or "") + ' Bienvenido'
+        if self.cliente_id:
+	        self.description = "Estimado %s" % (self.cliente_id.name or "") + ' Bienvenido'
+
+    @api.model
+    def create(self, vals):
+        #_logger.error("MOSTRANDO NOMBRE: %r", vals['state'])
+        vals['name'] = self.env['ir.sequence'].get('idea.demo') or '/'
+        res = super(idea_demo, self).create(vals)
+        return res
+
+
 
 
 

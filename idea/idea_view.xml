@@ -27,6 +27,7 @@
 				<sheet>
 			        <group colspan="2" col="2">
 			            <field name="name" />
+			            <field name="cliente_id"/>
 			            <field name="n1"/>
 			            <field name="n2"/>
 			            <field name="operacion"/>
@@ -48,6 +49,7 @@
                 <field name="arch" type="xml">
                 	<tree string="Idea list">
 			    		<field name="name"/>
+			    		<field name="cliente_id"/>
 			    		<field name="state"/>
 					</tree>
 				</field>
