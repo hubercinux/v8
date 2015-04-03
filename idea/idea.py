@@ -72,6 +72,8 @@ class idea_demo(models.Model):
     	#_logger.error("PINCKING id1: %r", self.name) 
         if self.cliente_id:
 	        self.description = "Estimado %s" % (self.cliente_id.name or "") + ' Bienvenido'
+        else:
+            self.description = ''
 
     @api.model
     def create(self, vals):
