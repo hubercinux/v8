@@ -20,8 +20,8 @@
 			<form string="Idea form" version="7.0">
 				<header>
 					<button class="oe_highlight" name="confirmar" type="object"  string="Validar" attrs="{'invisible':['|',('state', '=', 'done'),('state', '=', 'cancel')]}"/>
-					<button class="oe_highlight" name="anular" type="object" string="Anular" attrs="{'invisible':[('state', '=', 'cancel'),]}" />
-					<button class="oe_highlight" name="borrador" type="object" string="Borrador" attrs="{'invisible':[('state', '!=', 'cancel')]}" />
+					<button name="anular" type="object" string="Anular" attrs="{'invisible':[('state', '=', 'cancel'),]}" />
+					<button name="borrador" type="object" string="Borrador" attrs="{'invisible':[('state', '!=', 'cancel')]}" />
 					<field name="state" widget="statusbar"/>
 				</header>
 				<sheet>
@@ -50,6 +50,7 @@
                 	<tree string="Idea list">
 			    		<field name="name"/>
 			    		<field name="cliente_id"/>
+			    		<field name="resultado" sum="Total"/>
 			    		<field name="state"/>
 					</tree>
 				</field>
