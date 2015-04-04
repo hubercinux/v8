@@ -25,13 +25,21 @@
 					<field name="state" widget="statusbar"/>
 				</header>
 				<sheet>
-			        <group colspan="2" col="2">
+			        <group>
 			            <field name="name" />
-			            <field name="cliente_id"/>
-			            <field name="n1"/>
-			            <field name="n2"/>
-			            <field name="operacion"/>
-			            <field name="resultado"/>
+			        </group>
+			       	<group>
+			            <group>
+			            	<field name="cliente_id" />
+			            	<field name="user_id"/>
+			            	<field name="date"/>
+			            </group>
+			            <group>	
+				            <field name="n1"/>
+				            <field name="n2"/>
+				            <field name="operacion"/>
+				            <field name="resultado"/>
+			            </group>
 			        </group>
 			        <notebook colspan="4">
 			            <page string="Description">
@@ -50,6 +58,7 @@
                 	<tree string="Idea list">
 			    		<field name="name"/>
 			    		<field name="cliente_id"/>
+			    		<field name="user_id"/>
 			    		<field name="resultado" sum="Total"/>
 			    		<field name="state"/>
 					</tree>

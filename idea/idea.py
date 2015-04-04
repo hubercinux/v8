@@ -37,15 +37,16 @@ class idea_demo(models.Model):
     def compute_total(self):        
         self.resultado = self.n1 + self.n2
 
-    
     name = fields.Char(string='Nombre', required=True, readonly=True, default='/')
-    cliente_id = cliente = fields.Many2one('res.partner')
-    description	= fields.Text('Observacioni')
+    cliente_id = cliente = fields.Many2one('res.partner', string="Cliente", domain=[('customer', '=', True)])
+    description	= fields.Text('Observacion')
     n1 = fields.Integer(string='Numero 1')
     n2 = fields.Integer(string='Numero 2')
     operacion = fields.Selection([('suma', 'Sumar'),('restar','Restar')])
     resultado = fields.Float(compute='compute_total')
     state = fields.Selection([('draft', 'Nuevo'),('done','Realizado'),('cancel','Anulado')],default='draft')
+    user_id = cliente = fields.Many2one('res.users', string="Usuario", default = lambda self: self.env.user, readonly=True)
+    date = fields.Date(default=fields.Date.today , string='Fecha')
 
     @api.multi
     def confirmar(self):        
