@@ -25,8 +25,12 @@
 					<field name="state" widget="statusbar"/>
 				</header>
 				<sheet>
-			        <group>
-			            <field name="name" />
+			        <group>			            
+		             <label for="name"/>
+                        <div>
+                            <field name="name" class="oe_inline"/>
+                            <button  name="%(action_launch_idea_wizard)d" type="action"  string="⇒ Actualizar" class="oe_link"  attrs="{'invisible':[('name', '=', '/')]}" />
+                        </div>
 			        </group>
 			       	<group>
 			            <group>

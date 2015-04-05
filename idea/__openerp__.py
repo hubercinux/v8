@@ -28,10 +28,13 @@
 	'description' : 'modulo varios demo',
 	'depends' : ['base'],
 	'data' : [
+	            'wizard/idea_wizard.xml',  #Un wizard debe de ir primero, en relacion al view desde donde invoca la accion
+	            'security/idea_security.xml',
+				'security/ir.model.access.csv',
 				'idea_view.xml', 
 				'idea_sequence.xml',
-				'security/idea_security.xml',
-				'security/ir.model.access.csv',
+				
+				
 				],
 	'installable' : True,
 	'aplication' : True,
