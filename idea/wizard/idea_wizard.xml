@@ -24,12 +24,11 @@
                     name="Actualizar Nombre"
                     src_model="idea.demo"
                     res_model="idea.wizard"            
-                    view_mode="form" 
+                    view_mode="form"
                     target="new"
-                    key2="client_action_multi"
+                    key2="client_action_multi"                   
             />
-
-
+        <!-- el src_model hace que aparesca dentro del menu MAS de idea.demo 'Actualizar nombre'-->
 
     </data>
 </openerp>
