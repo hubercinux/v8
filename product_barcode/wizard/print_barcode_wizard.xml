@@ -24,8 +24,8 @@
         <act_window id="launch_barcode_wizard"
             key2="client_print_multi"
             name="Print Barcode"
-            res_model="product.barcode.wizard"
             src_model="product.product"
+            res_model="product.barcode.wizard"            
             view_mode="form" 
             target="new" 
             view_type="form" />
