@@ -21,13 +21,15 @@
 
 
 
-#from openerp import models
-from openerp import models, fields, api, _
-from openerp.exceptions import except_orm, Warning, RedirectWarning
 
+
+from openerp import models, fields, api, _
+
+from openerp.exceptions import except_orm, Warning, RedirectWarning
 
 import logging
 _logger = logging.getLogger(__name__)
+
 
 class idea_demo(models.Model):
     _name = 'idea.demo'
@@ -38,14 +40,14 @@ class idea_demo(models.Model):
         self.resultado = self.n1 + self.n2
 
     name = fields.Char(string='Nombre', required=True, readonly=True, default='/')
-    cliente_id = cliente = fields.Many2one('res.partner', string="Cliente", domain=[('customer', '=', True)])
+    cliente_id = fields.Many2one('res.partner', string="Cliente", domain=[('customer', '=', True)])
     description	= fields.Text('Observacion')
     n1 = fields.Integer(string='Numero 1')
     n2 = fields.Integer(string='Numero 2')
     operacion = fields.Selection([('suma', 'Sumar'),('restar','Restar')])
     resultado = fields.Float(compute='compute_total')
     state = fields.Selection([('draft', 'Nuevo'),('done','Realizado'),('cancel','Anulado')],default='draft')
-    user_id = cliente = fields.Many2one('res.users', string="Usuario", default = lambda self: self.env.user, readonly=True)
+    user_id = fields.Many2one('res.users', string="Usuario", default = lambda self: self.env.user, readonly=True)
     date = fields.Date(default=fields.Date.today , string='Fecha')
 
     @api.multi
@@ -59,18 +61,18 @@ class idea_demo(models.Model):
         
     @api.multi
     def borrador(self):  
-    	_logger.error("PINCKING id1: %r", self)      
+    	#_logger.error("PINCKING id1: %r", self)      
         self.state = 'draft'
 
     @api.one
     def unlink(self):
         if self.state not in ('draft', 'cancel'):
-        	raise Warning(_('No puedes eliminar un registo en estado Realizado, debes de Anual primero'))
+        	raise Warning('No puedes eliminar un registo en estado Realizado, debes de Anual primero')
         return super(idea_demo, self).unlink()
 
     @api.onchange('cliente_id')
     def onchange_cliente_id(self):
-    	#_logger.error("PINCKING id1: %r", self.name) 
+    	#_logger.error("AL CAMBIAR: %r", self.cliente_id.name) 
         if self.cliente_id:
 	        self.description = "Estimado %s" % (self.cliente_id.name or "") + ' Bienvenido'
         else:
@@ -78,10 +80,12 @@ class idea_demo(models.Model):
 
     @api.model
     def create(self, vals):
-        #_logger.error("MOSTRANDO NOMBRE: %r", vals['state'])
+        #_logger.error("MOSTRANDO CONTENIDO CREATE(): %r", vals)
         vals['name'] = self.env['ir.sequence'].get('idea.demo') or '/'
         res = super(idea_demo, self).create(vals)
+        #_logger.error("MOSTRANDO RES: %r", res.name)
         return res
+         
 
 
 
