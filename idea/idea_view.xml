@@ -17,41 +17,40 @@
 			<field name='name'>view.idea.demo.form</field>
     		<field name="model">idea.demo</field>
     		<field name="arch" type="xml">
-			<form string="Idea form" version="7.0">
-				<header>
-					<button class="oe_highlight" name="confirmar" type="object"  string="Validar" attrs="{'invisible':['|',('state', '=', 'done'),('state', '=', 'cancel')]}"/>
-					<button name="anular" type="object" string="Anular" attrs="{'invisible':[('state', '=', 'cancel'),]}" />
-					<button name="borrador" type="object" string="Borrador" attrs="{'invisible':[('state', '!=', 'cancel')]}" />
-					<field name="state" widget="statusbar"/>
-				</header>
-				<sheet>
-			        <group>			            
-		             <label for="name"/>
+				<form string="Idea form" version="7.0">
+					<header>
+						<button class="oe_highlight" name="confirmar" type="object"  string="Validar" attrs="{'invisible':['|',('state', '=', 'done'),('state', '=', 'cancel')]}" groups="idea.group_demo_manager"/>
+						<button name="anular" type="object" string="Anular" attrs="{'invisible':[('state', '=', 'cancel'),]}" />
+						<button name="borrador" type="object" string="Borrador" attrs="{'invisible':[('state', '!=', 'cancel')]}" />
+						<field name="state" widget="statusbar"/>
+					</header>
+					<sheet>         
                         <div>
-                            <field name="name" class="oe_inline"/>
+                        	<h1>
+                            <field name="name" class="oe_inline" label='0'/>
+                            </h1>
                             <button  name="%(action_launch_idea_wizard)d" type="action"  string="⇒ Actualizar" class="oe_link"  attrs="{'invisible':[('name', '=', '/')]}" />
-                        </div>
-			        </group>
-			       	<group>
-			            <group>
-			            	<field name="cliente_id" />
-			            	<field name="user_id"/>
-			            	<field name="date"/>
-			            </group>
-			            <group>	
-				            <field name="n1"/>
-				            <field name="n2"/>
-				            <field name="operacion"/>
-				            <field name="resultado"/>
-			            </group>
-			        </group>
-			        <notebook colspan="4">
-			            <page string="Description">
-			                <field name="description"/>
-			            </page>
-			        </notebook>
-				</sheet>
-			</form>
+                        </div>				        
+				       	<group>
+				            <group>
+				            	<field name="cliente_id" />
+				            	<field name="user_id"/>
+				            	<field name="date"/>
+				            </group>
+				            <group>	
+					            <field name="n1"/>
+					            <field name="n2"/>
+					            <field name="operacion"/>
+					            <field name="resultado"/>
+				            </group>
+				        </group>
+				        <notebook colspan="4">
+				            <page string="Description">
+				                <field name="description"/>
+				            </page>
+				        </notebook>
+					</sheet>
+				</form>
 			</field>
 		</record>
 
