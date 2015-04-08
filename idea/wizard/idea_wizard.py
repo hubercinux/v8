@@ -7,13 +7,14 @@ _logger = logging.getLogger(__name__)
 class idea_wizard(models.TransientModel):
     _name = 'idea.wizard'
 
+    @api.model
     def _default_name(self):
         recs = self.env['idea.demo'].browse(self._context.get('active_ids'))
         #recs = self.env['account.invoice'].search([('id', '=', recs.id)], )
         #_logger.error("updateee: %r", recs.journal_id.sequence_id.id)
         return recs.name
 
-    name = fields.Char(string="Nuevo Nombre",default=_default_name)
+    name = fields.Char(string="Nuevo Nombre", default=_default_name)
 
     @api.one
     def update_name(self):
