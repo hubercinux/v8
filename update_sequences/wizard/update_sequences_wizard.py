@@ -28,6 +28,7 @@ _logger = logging.getLogger(__name__)
 class tipo_documento_sequence_wizard(models.TransientModel):
     _name = "tipo.documento.sequence.wizard"
 
+    @api.model
     def _default_sequence(self):
         recs = self.env['account.invoice'].browse(self._context.get('active_ids'))
         #recs = self.env['account.invoice'].search([('id', '=', recs.id)], )
