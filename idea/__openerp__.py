@@ -26,15 +26,18 @@
 	'author' : 'Ing. Salazar C. J.',
 	'sumary' : 'Modulo de odoo para demo',
 	'description' : 'modulo varios demo',
-	'depends' : ['base'],
+	'depends' : [
+			'base',
+			'report', #USAMOS ESTA DEPENDENCIA SI ESTAMOS HACIENDO REPORTE DE IMPRESION
+			],
 	'data' : [
 	            'wizard/idea_wizard.xml',  #Un wizard debe de ir primero, en relacion al view desde donde invoca la accion
-	            'security/idea_security.xml',
-				'security/ir.model.access.csv',
+	            'security/idea_security.xml',#security debe de ir primero, en relacion al vista view
+				'security/ir.model.access.csv',#security debe de ir primero, en relacion al vista view
+				'idea_sequence.xml',				
+				'view/idea_print.xml',
 				'idea_view.xml', 
-				'idea_sequence.xml',
-				
-				
+				'report.xml',			
 				],
 	'installable' : True,
 	'aplication' : True,
