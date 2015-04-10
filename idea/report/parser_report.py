@@ -43,7 +43,7 @@ class idea_details(report_sxw.rml_parse):
         })
 
 
-class report_pos_details(osv.AbstractModel):
+class report_idea_details(osv.AbstractModel):
     _name = 'report.idea.report_parser_idea'
     _inherit = 'report.abstract_report'
     _template = 'idea.report_parser_idea'
