@@ -68,6 +68,9 @@
                                 </strong>
                             </div>
 
+                            <div class='row mt8 mb32"'>
+                                SON: <span t-esc="amount_to_text(o.resultado)"/>
+                            </div>
 
                         </div>
                  <!-- </t> -->

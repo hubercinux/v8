@@ -29,6 +29,7 @@
 	'depends' : [
 			'base',
 			'report', #USAMOS ESTA DEPENDENCIA SI ESTAMOS HACIENDO REPORTE DE IMPRESION
+			'base_translate_tools',
 			],
 	'data' : [
 	            'wizard/idea_wizard.xml',  #Un wizard debe de ir primero, en relacion al view desde donde invoca la accion
