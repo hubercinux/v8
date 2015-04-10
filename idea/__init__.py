@@ -21,3 +21,4 @@
 
 import idea
 import wizard
+import report

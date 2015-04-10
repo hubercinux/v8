@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- QWeb Reports -->
+        <!-- name= noombre_modulo.id_reporte o template del reporte-->
+        <!-- string= es el nombre que aparecera en la pestaña imprimir -->
+        <report 
+            id="report_idea_particular" 
+            model="idea.demo"             
+            string="Reporte demo particular" 
+            report_type="qweb-pdf"    
+            name="idea.report_idea_print_particular"         
+        />
+    
+
+        <!-- REPORTE PARTICULAR -->
+        <template id="report_idea_print_particular">  <!-- id= identificador del reporte o template -->
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                 <!-- <t t-call="report.external_layout">--> <!-- permite llamar al encabezado y pie de pagina-->
+                        <div class="page">
+                            <h2>CURSOS DE ODOO</h2> 
+                            <p>Curso: <span t-field="o.cliente_id.name"/>  </p>
+                            <p>Descripcion: <span t-field="o.description"/></p>   
+
+                             <img t-att-src="'report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', 401234567891, 600, 100)" style="width:300px;height:50px"/>
+
+                            <div class="row">Nueva Linea 1</div><!-- tiene 12 columnas-->
+
+                            <div class="row"><!-- tiene 12 columnas-->
+                                <!-- col-xs-6: Ancho de 6 columnas (contenedor) inicia de izquierda a derecha-->
+                                <div class="col-xs-6" style="background-color:#568eff;color:#ffffff;" >
+                                    Nueva Linea6
+                                </div>
+                            </div> 
+
+                            <div class="row"><!-- tiene 12 columnas-->
+                                <!-- col-xs-6: Ancho de 6 columnas (contenedor)-->
+                                <!-- col-xs-offset-3: significa que el contenedor empieza a mostrarse despues de la 3 columna contando de izquierda a dereecha  -->
+                                <div class="col-xs-6 col-xs-offset-3" style="background-color:#568eff;color:#ffffff;" >
+                                    Nueva Linea6
+                                </div>
+                            </div> 
+
+                            <div class="row mt8 mb32">Nueva Linea 2</div> 
+
+
+                            <div  class="row" style="background-color:#568eff;color:#ffffff;">
+                                <div class="col-xs-6 col-xs-offset-3" style="background-color:#000000;color:#ffffff;" > contenedor de 6 columnas se mostrarse despues de la 3 columna de izq->der</div>
+                                <!-- col-xs-pull-1 :  mostrara un contenedor de ancho 1 columna, que se mostrara a la derecha del ultimo div(contenedor) en relación a la fila absoluta(contenedor grande)-->
+                                <div class="col-xs-1 col-xs-pull-1" style="background-color:red;color:#ffffff;">derecho</div>
+                                <!-- pull (relative position, on the left hand of the last div element), -->
+                            </div>
+
+
+                            <div class="row">
+                               <div class="col-xs-10" style="text-align:right;border: 1px solid #568eff;">
+                                  <strong>Total:</strong>
+                               </div>
+                               <div class="col-xs-2" style="text-align:right;border: 1px solid #568eff;border-left:0px;">
+                                  <strong>100.00</strong>
+                               </div>
+                            </div>   
+
+
+                        </div>
+                 <!-- </t> -->
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>

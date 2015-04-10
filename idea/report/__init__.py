@@ -19,27 +19,4 @@
 #
 ##############################################################################
 
-
-{
-	'name' : 'Modulo demo idea v8',
-	'version' : '1.0',
-	'author' : 'Ing. Salazar C. J.',
-	'sumary' : 'Modulo de odoo para demo',
-	'description' : 'modulo varios demo',
-	'depends' : [
-			'base',
-			'report', #USAMOS ESTA DEPENDENCIA SI ESTAMOS HACIENDO REPORTE DE IMPRESION
-			],
-	'data' : [
-	            'wizard/idea_wizard.xml',  #Un wizard debe de ir primero, en relacion al view desde donde invoca la accion
-	            'security/idea_security.xml',#security debe de ir primero, en relacion al vista view
-				'security/ir.model.access.csv',#security debe de ir primero, en relacion al vista view
-				'idea_sequence.xml',				
-				'idea_view.xml', 
-				'report.xml',	
-				'views/particular_report.xml',
-				],
-	'installable' : True,
-	'aplication' : True,
-	
-}
+import particular_report
