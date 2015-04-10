@@ -7,7 +7,7 @@
         <report 
             id="report_idea_demo_simple" 
             model="idea.demo"             
-            string="Imprimir demo" 
+            string="Reporte demo simple" 
             report_type="qweb-pdf"    
             name="idea.report_idea_demo_print_simple"         
         />
