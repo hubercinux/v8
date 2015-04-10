@@ -35,7 +35,6 @@
 	            'security/idea_security.xml',#security debe de ir primero, en relacion al vista view
 				'security/ir.model.access.csv',#security debe de ir primero, en relacion al vista view
 				'idea_sequence.xml',				
-				'view/idea_print.xml',
 				'idea_view.xml', 
 				'report.xml',			
 				],
