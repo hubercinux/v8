@@ -30,16 +30,21 @@ class idea_details(report_sxw.rml_parse):
         user_obj = self.pool.get('res.users')
         return ', '.join(map(lambda x: x.name, user_obj.browse(self.cr, self.uid, user_ids.id)))
 
-    def convertir(self, amount, currency="NUEVOS SOLES"):
+    def convertir_pe(self, amount, currency="NUEVOS SOLES"):
         amount = float(amount)
         return self.pool.get('ir.translation').amount_to_text(amount, 'pe', currency or 'Nuevo Sol')
+
+    def convertir_hn(self, amount, currency="LEMPIRAS"):
+        amount = float(amount)
+        return self.pool.get('ir.translation').amount_to_text(amount, 'hn', currency or 'LEMPIRAS')
 
     def __init__(self, cr, uid, name, context):
         super(idea_details, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'time': time,
             'get_user_names': self._get_user_names,
-            'amount_to_text': self.convertir,
+            'to_text_pe': self.convertir_pe,
+            'to_text_hn': self.convertir_hn,
         })
 
 
