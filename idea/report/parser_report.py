@@ -19,28 +19,29 @@
 #
 ##############################################################################
 
+import time
+from openerp.osv import osv
+from openerp.report import report_sxw
 
-{
-	'name' : 'Modulo demo idea v8',
-	'version' : '1.0',
-	'author' : 'Ing. Salazar C. J.',
-	'sumary' : 'Modulo de odoo para demo',
-	'description' : 'modulo varios demo',
-	'depends' : [
-			'base',
-			'report', #USAMOS ESTA DEPENDENCIA SI ESTAMOS HACIENDO REPORTE DE IMPRESION
-			],
-	'data' : [
-	            'wizard/idea_wizard.xml',  #Un wizard debe de ir primero, en relacion al view desde donde invoca la accion
-	            'security/idea_security.xml',#security debe de ir primero, en relacion al vista view
-				'security/ir.model.access.csv',#security debe de ir primero, en relacion al vista view
-				'idea_sequence.xml',				
-				'idea_view.xml', 
-				'report.xml',	
-				'views/particular_report.xml',
-				'views/parser_report.xml',
-				],
-	'installable' : True,
-	'aplication' : True,
-	
-}
+
+class idea_details(report_sxw.rml_parse):
+
+    def _get_user_names(self, user_ids):
+        user_obj = self.pool.get('res.users')
+        return ', '.join(map(lambda x: x.name, user_obj.browse(self.cr, self.uid, user_ids.id)))
+
+    def __init__(self, cr, uid, name, context):
+        super(idea_details, self).__init__(cr, uid, name, context=context)
+        self.localcontext.update({
+            'time': time,
+            'get_user_names': self._get_user_names,
+        })
+
+
+class report_pos_details(osv.AbstractModel):
+    _name = 'report.idea.report_parser_idea'
+    _inherit = 'report.abstract_report'
+    _template = 'idea.report_parser_idea'
+    _wrapped_report_class = idea_details
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
