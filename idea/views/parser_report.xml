@@ -69,7 +69,10 @@
                             </div>
 
                             <div class='row mt8 mb32"'>
-                                SON: <span t-esc="amount_to_text(o.resultado)"/>
+                              EN SOLES SON: <span t-esc="to_text_pe(o.resultado)"/>
+                            </div>
+                            <div class='row mt8 mb32"'>
+                              EN LEMPIRAS SON: <span t-esc="to_text_hn(o.resultado)"/>
                             </div>
 
                         </div>
