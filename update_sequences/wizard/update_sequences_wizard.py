@@ -43,11 +43,13 @@ class tipo_documento_sequence_wizard(models.TransientModel):
         #_logger.error("updateee: %r", self.sequence_id) 
         if self.sequence_id:
             self.next_number = self.sequence_id.number_next_actual
-
-
+        else:
+            self.next_number = ''
+ 
     @api.multi
     def update_sequence(self):
-        recs = self.env['ir.sequence'].search([('id', '=', self.sequence_id.id)], )
+        #recs = self.env['ir.sequence'].search([('id', '=', self.sequence_id.id)], )#Esto es una forma de acceder
+        recs = self.env['ir.sequence'].browse(self.sequence_id.id)
         #_logger.error("updateee: %r", recs)
         recs.write({'number_next_actual': self.next_number})
         return True    
