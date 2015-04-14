@@ -29,4 +29,8 @@ class stock_location(models.Model):
 class stock_warehouse(models.Model):
     _inherit = 'stock.warehouse'
     group_ids = fields.Many2many('res.groups')
-    
+  
+class product_template(models.Model):
+    _inherit = 'product.template'
+    group_ids = fields.Many2many('res.groups')
+

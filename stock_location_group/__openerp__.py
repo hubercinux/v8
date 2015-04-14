@@ -26,7 +26,7 @@
 	'author' : 'Ing. Javier Huber Salazar Carlos',
 	'sumary' : 'Location por groups',
 	'description' : 'Restringe los accesos por grupos a las ubicaciones',
-	'depends' : ['stock'],
+	'depends' : ['stock', 'point_of_sale'],
 	'data' : [
 			'stock_view.xml',
 			'security/security.xml',

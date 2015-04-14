@@ -28,5 +28,19 @@
 			</field>
 		</record>
 
+
+		<!-- Añade el campo group_ids la vista view_template_property_form de product.template-->
+		<record model="ir.ui.view" id="view_stock_product_template_group_form">
+			<field name="name">stock.product.template.group.form</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="stock.view_template_property_form"/>
+			<field name="arch" type="xml">
+				<field name="virtual_available" position="after">
+					<separator string="Grupos" colspan="4"/>
+					<field name="group_ids" widget="many2many_tags"/>
+				</field>
+			</field>
+		</record>
+
    </data>
 </openerp>
