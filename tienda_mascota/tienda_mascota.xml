@@ -5,7 +5,8 @@
         <template id="assets_backend" name="tienda_mascota_assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
                 <link rel="stylesheet" href="/tienda_mascota/static/src/css/tienda_mascota.css"/>
-                <script type="text/javascript" src="/tienda_mascota/static/src/js/tienda_mascota.js"/>
+                <script type="text/javascript" src="/tienda_mascota/static/src/js/tienda_mascota.js"/>             
+
             </xpath>
         </template>
 
@@ -19,8 +20,37 @@
             <field name="name">Tienda de Mascota</field>
             <field name="tag">tienda_mascota.paginainicio</field>
         </record>
+        <menuitem id="home_page_tienda_menu" name="Mascotas" parent="tienda_menu" action="action_home_page" sequence="1"/>
 
-        <menuitem id="home_page_tienda_menu" name="Mascotas" parent="tienda_menu" action="action_home_page"/>
+
+        <record id="action_uso_widgets" model="ir.actions.client">
+            <field name="name">Tienda de Mascota</field>
+            <field name="tag">tienda_mascota.uso_widgets</field>
+        </record>
+        <menuitem id="widgets_menu" name="Uso Qweb en widgets" parent="tienda_menu" action="action_uso_widgets" sequence="2"/>
+
+
+        <record id="action_uso_eventos" model="ir.actions.client">
+            <field name="name">Tienda de Mascota</field>
+            <field name="tag">tienda_mascota.uso_eventos</field>
+        </record>
+        <menuitem id="eventos_menu" name="Uso de Eventos" parent="tienda_menu" action="action_uso_eventos" sequence="3"/>
+
+
+        <record id="action_uso_eventos_propiedades" model="ir.actions.client">
+            <field name="name">Tienda de Mascota</field>
+            <field name="tag">tienda_mascota.uso_eventos_propiedades</field>
+        </record>
+        <menuitem id="eventos_propiedades_menu" name="Uso Eventos Propiedades" parent="tienda_menu" action="action_uso_eventos_propiedades" sequence="4"/>
+
+
+        <record id="action_base_datos" model="ir.actions.client">
+            <field name="name">Tienda de Mascota</field>
+            <field name="tag">tienda_mascota.base_datos</field>
+        </record>
+        <menuitem id="base_datos_menu" name="Base datoss" parent="tienda_menu" action="action_base_datos" sequence="5"/>
+
+
 
     </data>
 </openerp>
