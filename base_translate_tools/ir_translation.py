@@ -242,6 +242,7 @@ class ir_translation(models.Model):
     def add_amount_to_text_function(self,lang, func):
         self._translate_funcs[lang] = func
 
+    @api.model
     def amount_to_text(self, nbr, lang='pe', currency='Nuevos Soles'):
         if not self._translate_funcs.has_key(lang):
             netsvc.Logger().notifyChannel("amount_to_text",netsvc.LOG_INFO, "WARNING: no translation function found for lang: '%s'" % (lang,))
