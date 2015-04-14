@@ -124,12 +124,18 @@ openerp.tienda_mascota = function(instance, local) {
     //Creando nuevo Widget BASE DATOS
     local.BaseDatos = instance.Widget.extend({
         start: function() {
-        var self = this;
-        var model = new instance.web.Model("tienda.mensaje");
-        model.call("mostrar_mensaje", {context: new instance.web.CompoundContext()}).then(function(result) {
+            var self = this;
+            var model = new instance.web.Model("tienda.mensaje");
+            model.call("mostrar_mensaje", {context: new instance.web.CompoundContext()}).then(function(result) {
             self.$el.append("<div>Hola " + result["mensaje"] + "</div>");
             // will show "Hello world" to the user
-            });        
+                });
+            var model_tex = new instance.web.Model("ir.translation");
+            model_tex.call('amount_to_text',{'nbr':250,'lang':'hn','currency':'LEMPIRAS'}).then(function(monto2text){
+            self.$el.append("<div>SON: " + monto2text + "</div>");    
+            });
+
+
         },
     });
 
