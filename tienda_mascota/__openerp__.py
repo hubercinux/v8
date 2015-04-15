@@ -16,7 +16,7 @@ Bienvenido aqui encontrara variedad para elegir su mascota
     'data': [
         "tienda_mascota.xml",
     ],
-    'depends' : ['sale_stock'],
+    'depends' : ['base','base_translate_tools'],
     'qweb': ['static/src/xml/*.xml'],
     'application': True,
 }
