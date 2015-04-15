@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-extend="PosTicket" >
+        <t t-jquery=".emph" t-operation="after">
+            <tr>
+                <td>SON:</td>
+                <td class="pos-right-align">
+                    <t t-esc="widget.format_currency(order.getTotalTaxIncluded())"/>
+                </td>
+            </tr>
+        </t>
+    </t>
+</templates>
