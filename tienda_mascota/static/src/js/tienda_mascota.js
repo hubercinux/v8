@@ -131,7 +131,7 @@ openerp.tienda_mascota = function(instance, local) {
             // will show "Hello world" to the user
                 });
             var model_tex = new instance.web.Model("ir.translation");
-            model_tex.call('amount_to_text',{'nbr':250,'lang':'hn','currency':'LEMPIRAS'}).then(function(monto2text){
+            model_tex.call('amount_to_text',{'nbr':456,'lang':'hn','currency':'LEMPIRAS'}).then(function(monto2text){
             self.$el.append("<div>SON: " + monto2text + "</div>");    
             });
 
