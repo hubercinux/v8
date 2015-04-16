@@ -3,8 +3,10 @@
 {
     'name' : 'Mount to Text',
     'version': '1.0',
+    'author' : 'Ing. Javier Salazar Carlos',
+    'category' : 'Point Of Sale',
+    'website' : 'https://sysneoconsulting.com',
     'summary': 'Monto a texto',
-    'category': 'Tools',
     'description':
         """
 Odoo Modulo Web - Monto a texto
@@ -12,12 +14,10 @@ Odoo Modulo Web - Monto a texto
  
 Convierte el monto a texto en el POS
         """,
-    'data': [ ],
+    'data': [ 
+        'views/template.xml',
+        ],
     'depends' : ['base','base_translate_tools','point_of_sale',],
-    'js': [
-        'static/src/js/main.js',
-        'static/src/js/amount_text.js',
-    ],
     'qweb': ['static/src/xml/*.xml'],
     'application': True,
 }

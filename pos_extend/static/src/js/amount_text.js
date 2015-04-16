@@ -5,12 +5,13 @@ function odoo_amount_text(instance,module){
     module.Order = module.Order.extend({
         amount_text: function(){
             var model_tex = new instance.web.Model("ir.translation");
-            model_tex.call('amount_to_text',{'nbr':250,'lang':'hn','currency':'LEMPIRAS'}).then(function(monto2text){
-            self.$el.append("<div>Son: " + monto2text + "</div>");    
+            model_tex.call('amount_to_text',{'nbr':this.getTotalTaxIncluded(),'lang':'hn','currency':'LEMPIRAS'}).then(function(monto2text){
+                //console.log("ERROR1", monto2text );
+                $('#montotext').html('SON: '+ monto2text);                          
             });
+                   
         },
 
     });
-
 
 }

@@ -3,10 +3,11 @@
 
     <t t-extend="PosTicket" >
         <t t-jquery=".emph" t-operation="after">
-            <tr>
-                <td>SON:</td>
-                <td class="pos-right-align">
-                    <t t-esc="widget.format_currency(order.getTotalTaxIncluded())"/>
+            <tr>                
+                <td colspan="2">
+                    <div id="montotext">                        
+                         <t t-esc="order.amount_text()"/>
+                    </div>
                 </td>
             </tr>
         </t>
