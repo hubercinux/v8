@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
 
+    <!--Añade el nombre del cliente en el ticket-->
+    <t t-extend="PosTicket" >
+        <t t-jquery=".pos-center-align" t-operation="after">
+            <br />Cliente: <t t-esc="order.get_client_name()"/>
+        </t>
+    </t>
+    <!--Añade el monto convertido a monto en el ticket-->
     <t t-extend="PosTicket" >
         <t t-jquery=".emph" t-operation="after">
             <tr>                
