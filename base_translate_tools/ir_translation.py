@@ -117,7 +117,7 @@ class ir_translation(models.Model):
                 output += '%s%s' % (DECENAS[int(n[1])-2], UNIDADES[int(n[2])])
         return output
 
-    def amount_to_text_pe(self,number_in, currency):
+    def amount_to_text_pe(self,number_in, currency='NUEVOS SOLES'):
         #netsvc.Logger().notifyChannel("amount_to_text_pe",netsvc.LOG_INFO, "number_in: %s, currency: %s"%(number_in, currency))
         converted = ''                              
         if type(number_in) != 'str':
@@ -153,7 +153,7 @@ class ir_translation(models.Model):
           number_dec = "00" 
         if (len(number_dec) < 2 ):
           number_dec+='0'         
-        converted += 'y ' + number_dec + "/100 " + currency
+        converted += 'Y ' + number_dec + "/100 " + 'NUEVOS SOLES'
         return converted
 
     def amount_to_text_co(self,number_in, currency="PESOS"):
@@ -231,19 +231,65 @@ class ir_translation(models.Model):
           number_dec = "00" 
         if (len(number_dec) < 2 ):
           number_dec+='0'         
-        converted += currency + ' CON ' + number_dec + "/100 "
+        converted += 'LEMPIRAS' + ' CON ' + number_dec + "/100 "
+        return converted
+
+    def amount_to_text_us(self,number_in, currency='DOLARES'):
+        #netsvc.Logger().notifyChannel("amount_to_text_pe",netsvc.LOG_INFO, "number_in: %s, currency: %s"%(number_in, currency))
+        converted = ''                              
+        if type(number_in) != 'str':
+          number = str(round(number_in,2))   
+        else:                       
+          number = number_in        
+        number_str=number                                      
+        try:                                                   
+          number_int, number_dec = number_str.split(".")       
+        except ValueError:                                     
+          number_int = number_str                              
+          number_dec = ""                                      
+        number_str = number_int.zfill(9)
+        millones = number_str[:3]       
+        miles = number_str[3:6]         
+        cientos = number_str[6:]
+        if(millones):
+            if(millones == '001'):
+                converted += 'UN MILLON '
+            elif(int(millones) > 0):     
+                converted += '%sMILLONES ' % self.__convertNumber(millones)
+        if(miles):                                                    
+            if(miles == '001'):                                       
+                converted += 'MIL '                                   
+            elif(int(miles) > 0):                                     
+                converted += '%sMIL ' % self.__convertNumber(miles)        
+        if(cientos):                                                  
+            if(cientos == '001'):                                     
+                converted += 'UN '                                    
+            elif(int(cientos) > 0):                                   
+                converted += '%s ' % self.__convertNumber(cientos)         
+        if number_dec == "":
+          number_dec = "00" 
+        if (len(number_dec) < 2 ):
+          number_dec+='0'         
+        converted += 'DOLARES' + ' CON ' + number_dec + "/100 "
         return converted
 
 #-------------------------------------------------------------
 # Generic functions
 #-------------------------------------------------------------
-    _translate_funcs = {'hn': 'self.amount_to_text_hn', 'co': 'self.amount_to_text_co', 'pe': 'self.amount_to_text_pe', 'es': 'self.amount_to_text_pe', 'en': 'self.amount_to_text_en',}
+    _translate_funcs = {'hn': 'self.amount_to_text_hn', 'co': 'self.amount_to_text_co', 'pe': 'self.amount_to_text_pe','PEN': 'self.amount_to_text_pe', 'es': 'self.amount_to_text_pe', 'en': 'self.amount_to_text_en', 'us': 'self.amount_to_text_us', }
 
     def add_amount_to_text_function(self,lang, func):
         self._translate_funcs[lang] = func
 
+    def amount_to_text(self, nbr, lang='pe', currency=''):
+        if not self._translate_funcs.has_key(lang):
+            netsvc.Logger().notifyChannel("amount_to_text",netsvc.LOG_INFO, "WARNING: no translation function found for lang: '%s'" % (lang,))
+            lang = 'en'
+        exec("res = %s(abs(nbr), currency)"%(self._translate_funcs[lang]))
+        return res
+
     @api.model
-    def amount_to_text(self, nbr, lang='pe', currency='Nuevos Soles'):
+    def amount_to_text_pos(self, nbr, lang='pe', currency=''):
         if not self._translate_funcs.has_key(lang):
             netsvc.Logger().notifyChannel("amount_to_text",netsvc.LOG_INFO, "WARNING: no translation function found for lang: '%s'" % (lang,))
             lang = 'en'
