@@ -3,14 +3,20 @@ function odoo_amount_text(instance,module){
 	var _t = instance.web._t;
 
     //Reemplazamos y agregamos la propiedad 'name' al model original
-    module.PosModel.prototype.models.push({
+    module.PosModel.prototype.models.splice(12,1,{
         model: 'res.currency',
         fields: ['symbol','position','rounding','accuracy','name'],
-        domain: function(self){ return [['id','=',self.pricelist.currency_id[0]]]; },
+        ids:    function(self){ return [self.pricelist.currency_id[0]]; },
         loaded: function(self, currencies){
             self.currency = currencies[0];
+            if (self.currency.rounding > 0) {
+                self.currency.decimals = Math.ceil(Math.log(1.0 / self.currency.rounding) / Math.log(10));
+            } else {
+                self.currency.decimals = 0;
+            }
         },
     });
+
 
     //Extendemos el model Order para agregarle una nueva funcion amount_tex()
     module.Order = module.Order.extend({
@@ -24,5 +30,4 @@ function odoo_amount_text(instance,module){
         },
 
     });
-
 }
