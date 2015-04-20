@@ -2,10 +2,10 @@ function odoo_amount_text(instance,module){
     var QWeb = instance.web.qweb;
 	var _t = instance.web._t;
 
-    //Reemplazamos y agregamos la propiedad 'name' al model original
+    //Reemplazamos y agregamos la propiedad 'name' al model original para ver el nombre de la moneda ejmp: PEN
     module.PosModel.prototype.models.splice(12,1,{
         model: 'res.currency',
-        fields: ['symbol','position','rounding','accuracy','name'],
+        fields: ['symbol','position','rounding','accuracy','name','rate_silent'],
         ids:    function(self){ return [self.pricelist.currency_id[0]]; },
         loaded: function(self, currencies){
             self.currency = currencies[0];
@@ -16,7 +16,6 @@ function odoo_amount_text(instance,module){
             }
         },
     });
-
 
     //Extendemos el model Order para agregarle una nueva funcion amount_tex()
     module.Order = module.Order.extend({

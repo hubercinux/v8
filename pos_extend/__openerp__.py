@@ -16,6 +16,7 @@ Convierte el monto a texto en el POS
         """,
     'data': [ 
         'views/template.xml',
+        'pos_extend.xml',
         ],
     'depends' : ['base','base_translate_tools','point_of_sale',],
     'qweb': ['static/src/xml/*.xml'],

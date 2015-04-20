@@ -19,4 +19,16 @@
             </tr>
         </t>
     </t>
+
+    <!--Añade tipo de cambio en el Fronend-->
+    <t t-extend="PaymentScreenWidget" >
+        <t t-jquery=".payment-due-total" t-operation="before">
+            <div id='typo_cambio'>
+                Tipo de cambio:
+                <span id='typo_cambio_valor'>                
+                </span> 
+            </div> 
+        </t>
+    </t>
+
 </templates>
