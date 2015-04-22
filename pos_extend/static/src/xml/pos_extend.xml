@@ -27,6 +27,11 @@
                 Tipo de cambio:
                 <span id='typo_cambio_valor'>                
                 </span> 
+            </div>
+            <div id='menda_base'>
+                Moneda Base Caja:
+                <span id='moneda_base'>                
+                </span> 
             </div> 
         </t>
     </t>
