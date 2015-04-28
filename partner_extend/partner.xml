@@ -1,0 +1,19 @@
+<openerp>
+    <data>
+        <record id="res_partner_extend_inherit" model="ir.ui.view">
+            <field name="name">res.partner.extend.view.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="before">
+                    <group col="12">
+                        <field name="doc_type" nolabel="1" colspan="9"/>
+                        <field name="doc_number" placeholder="Numero Doc." string="RUC/DNI" nolabel="1" colspan="3" style="width: 150%%" />
+                    </group>
+
+                </field>
+
+            </field>
+        </record>
+    </data>
+</openerp>
