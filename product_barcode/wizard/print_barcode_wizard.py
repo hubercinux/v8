@@ -1,22 +1,34 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, fields, api
+import logging
+_logger = logging.getLogger(__name__)
 
 class product_barcode_wizard(models.TransientModel):
     _name = 'product.barcode.wizard'
 
-    col = fields.Char(string="Columna", required=False)
-    row = fields.Char(string="Fila",required=False)
+    col = fields.Integer(string="Columna", required=True, default=1)
+    row = fields.Integer(string="Fila",required=True, default=1)
+    qty = fields.Integer(string="Cantidad",required=False, default=1)
+    start = fields.Integer(string="Posicion de Inicio",required=True, )
 
-    def print_barcode(self, cr, uid, ids, context=None):
-        """
-        To get the date and print the report
-        @return : return report
-        """
-        if context is None:
-            context = {}
-        datas = {'ids': context.get('active_ids', [])}
-        res = self.read(cr, uid, ids, ['col','row'], context=context)
-        res = res and res[0] or {}        
+    @api.onchange('col','row')
+    def onchange_start(self):
+        #_logger.error("updateee: %r", self.sequence_id) 
+        if self.col<=3 and self.row<=8:
+            self.start = self.row*3 - (3-self.col) 
+        else:
+            self.start = 1
+
+    @api.multi
+    def print_barcode(self):
+        datas = {'ids': self._context.get('active_ids')}
+        res = self.read(['col','row','qty','start'])
+        #_logger.error("PINCKING id1: %r", res)
+        res = res and res[0] or {}  
+        datas['qtys'] = range(1,res['qty']+1,)
         datas['form'] = res
-        return self.pool['report'].get_action(cr, uid, [], 'product_barcode.report_barcode_print_template', data=datas, context=context)
+        #_logger.error("PINCKING id2: %r", datas)  
+        return self.env['report'].get_action(self, 'product_barcode.report_barcode_print_template', data=datas)
+        #return self.pool['report'].get_action(self._cr, self._uid, [], 'product_barcode.report_barcode_print_template', data=datas, context=self._context)
+
