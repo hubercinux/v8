@@ -17,9 +17,9 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        'report.xml',
+        # 'security/ir.model.access.csv',        
         'wizard/print_barcode_wizard.xml',
+        'report.xml',
         'views/report_barcode.xml',
 
     ],

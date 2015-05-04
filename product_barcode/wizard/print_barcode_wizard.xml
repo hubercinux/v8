@@ -2,15 +2,28 @@
 <openerp>
     <data>
 
-
         <record model="ir.ui.view" id="wizard_barcode_form_view">
             <field name="name">barcode.wizard.form</field>
             <field name="model">product.barcode.wizard</field>
             <field name="arch" type="xml">
                 <form string="Imprimir Barcode">
                     <group col="4" string="Ingrese atributos de impresion">
-                        <field name="col" />
-                        <field name="row" />
+                        <label for="row"/>
+                        <div>
+                            <field name="row" class="oe_inline"/> max. 8
+                        </div>
+                        <label for="col"/>
+                        <div>
+                            <field name="col" class="oe_inline"/> max. 3
+                        </div>
+                    </group>
+                    <group col="4">
+                      <group col="4" string="Cantidad a imprimir">  
+                        <field name="qty" />                         
+                      </group>
+                      <group col="4" string="Posicion de inicio">
+                        <field name="start"/>
+                      </group>
                     </group>
                     <footer>
                         <button name="print_barcode" type="object" string="Imprimir" class="oe_highlight"/>

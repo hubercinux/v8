@@ -18,8 +18,29 @@
             model="product.product" 
             report_type="qweb-pdf" 
             name="product_barcode.report_barcode_print_template" 
-            file="product_barcode.report_barcode_print_template"
             menu="False"/>
+
+
+        <!-- formato de hoja -->
+        <record id="paperformat_product_barcode" model="report.paperformat">
+            <field name="name">Hoja Immpresion barcode</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">12</field>
+            <field name="margin_bottom">12</field>
+            <field name="margin_left">35</field>
+            <field name="margin_right">35</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">3</field>
+            <field name="dpi">130</field>
+        </record>
+
+        <!--Asociar el reporte al formato de hoja mediante el tributo ref="name_modulo.id_formato_hoja" -->
+        <!--id=id_reporte" definido arriba-->
+        <record id="report_barcode_print" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="product_barcode.paperformat_product_barcode"/>
+        </record>
 
     </data>
 </openerp>
