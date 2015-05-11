@@ -7,14 +7,14 @@
         <report id="report_product_barcode" 
         model="product.product" 
         name="product_print_barcode.barcode"  
-        string="Codigo de barra" 
+        string="Codigo de barra demo" 
         xml="product_barcode/report/product_barcode.xml" 
         xsl="product_barcode/report/product_barcode.xsl"/>
         <!-- fin -->
 
         <report 
             id="report_barcode_print" 
-            string="Print barcode product" 
+            string="Codigo de barra real" 
             model="product.product" 
             report_type="qweb-pdf" 
             name="product_barcode.report_barcode_print_template" 
@@ -26,7 +26,7 @@
             <field name="name">Hoja Immpresion barcode</field>
             <field name="default" eval="True"/>
             <field name="format">A4</field>
-            <field name="orientation">Landscape</field>
+            <field name="orientation">Portrait</field>
             <field name="margin_top">12</field>
             <field name="margin_bottom">12</field>
             <field name="margin_left">35</field>

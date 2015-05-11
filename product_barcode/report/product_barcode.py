@@ -30,14 +30,66 @@ class product_barcode_print(report_sxw.rml_parse):
 
     def _product_details(self, data):
         datas = []
-        result = {}
-        #_logger.error("PINCKING id1: %r", data['form']['qty'])
+        result = {  'name1':'', 'price1':'', 'ean13_1':'',
+                    'name2':'', 'price2':'', 'ean13_2':'',
+                    'name3':'', 'price3':'', 'ean13_3':'',
+                    }
+
+        result1 = { 'name1':'', 'price1':'', 'ean13_1':'',
+                    'name2':'', 'price2':'', 'ean13_2':'', 
+                    'name3':'', 'price3':'', 'ean13_3':'',
+                    }
+        q = 1 #Cantidad inicia en 1
+        f = 1 # fila menor a la fila de inicio
+        fila = data['form']['row'] #NUmero de fila
+        columna = data['form']['col'] #NUmero de columna
+        qty = data['form']['qty'] #cantidad
+        start = data['form']['start'] #inicio
+
+        fil=fila
+
+       # _logger.error("PINCKING id111111: %r", data['form']['row'])
         prod_obj = self.pool.get('product.product')
         prod_id = prod_obj.search(self.cr, self.uid, [('id','in',data['ids']),])
         #for i in range(1,data['form']['qty'] + 1):
-        for producto in prod_obj.browse(self.cr, self.uid, prod_id):            
-            result = {'name': producto.name,'ean13': producto.ean13}
-            datas.append(result)
+        for producto in prod_obj.browse(self.cr, self.uid, prod_id):             
+            while f < fila: 
+                result1.update({'name1': '', 'price1':'', 'ean13_1':'',})
+                result1.update({'name2': '', 'price2':'', 'ean13_2':'',})
+                result1.update({'name3': '', 'price3':'', 'ean13_3':'',})
+                datas.append(result1)
+                f += 1
+
+            while fil == fila:
+                columna = 1            
+                if ( columna == 1 and q <= qty ):
+                    if (fila*3-(3-columna))>= start:
+                        result.update({'name1': producto.name, 'price1': producto.lst_price, 'ean13_1':producto.ean13,})
+                        q += 1                                            
+                    columna += 1
+
+                if (columna == 2 and q <= qty  ):                    
+                    if (fila*3-(3-columna))>= start:
+                        result.update({'name2': producto.name, 'price2': producto.lst_price, 'ean13_2':producto.ean13,})
+                        q += 1                                        
+                    columna += 1
+
+                if (columna == 3 and q <= qty ):
+                    if (fila*3-(3-columna))>= start:
+                        result.update({'name3': producto.name, 'price3': producto.lst_price, 'ean13_3':producto.ean13,})
+                        q += 1                               
+                fil += 1
+                fila += 1
+                                            
+                #_logger.error("PINCKING id555555555: %r", datas)
+                datas.append(result)
+                result={'name1':'', 'price1':'', 'ean13_1':'',
+                        'name2':'', 'price2':'', 'ean13_2':'',
+                        'name3':'', 'price3':'', 'ean13_3':'',
+                        }
+                if q > qty:
+                    break   
+                     
         return datas
 
 

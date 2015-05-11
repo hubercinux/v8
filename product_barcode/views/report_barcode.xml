@@ -4,9 +4,9 @@
         <template id="report_barcode_print_template">
             <t t-call="report.html_container">
                 <div class="page">
-
-                    <t t-foreach="data['qtys']" t-as="item">
-                        <div class="row mt32">
+                <!--
+                    <t t-foreach="data['qtys']" t-as="item" >
+                        <div class="row mt32" >
 
                             <div class="col-xs-3" >
                                 <strong> </strong>:<br/>
@@ -20,11 +20,51 @@
                                 <span t-esc="prod_ids['ean13']"/>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-3" style="background-color:green;color:#ffffff;margin-right:2.5mm;margin-bottom:2mm;width:66mm; height:33.9mm;">
                                 <strong> </strong>:<br/>                                
                             </div>
+
+
                         </div>
                     </t>
+                -->
+
+            
+                    <div class="row" style="width:203mm;"  t-foreach="product_details(data)" t-as="prod_ids">
+
+                        <div class="col-xs-4" style="color:#000000;margin-right:2.5mm;margin-bottom:2mm;width:66mm; height:33.9mm;" >
+                        <t t-if="prod_ids['ean13_1']">
+                            <img t-att-src="'report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', prod_ids['ean13_1'], 600, 100)" style="width:200px;height:45px"/>
+                        </t>
+                            <span t-esc="prod_ids['name1']"/>  <br/>
+                            <t t-if="prod_ids['ean13_1']">
+                                <span t-esc="res_company.currency_id.symbol"/>
+                            </t>
+                            <span t-esc="prod_ids['price1']"/>                       
+                        </div>
+
+                        <div class="col-xs-4" style="color:#000000;margin-right:2.5mm;width:66mm;height:33.9mm;">
+                        <t t-if="prod_ids['ean13_2']">
+                            <img t-att-src="'report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', prod_ids['ean13_2'], 600, 100)" style="width:200px;height:45px"/> 
+                        </t>                 
+                            <span t-esc="prod_ids['name2']"/>  <br/> 
+                            <t t-if="prod_ids['ean13_2']">
+                                <span t-esc="res_company.currency_id.symbol"/>  
+                            </t> 
+                            <span t-esc="prod_ids['price2']"/>                                                                            
+                        </div>
+                        <div class="col-xs-4" style="color:#000000;width:66mm;height:33.9mm;">
+                        <t t-if="prod_ids['ean13_3']">
+                            <img t-att-src="'report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', prod_ids['ean13_3'], 600, 100)" style="width:200px;height:45px"/>
+                        </t>
+                            <span t-esc="prod_ids['name3']"/> <br/>
+                            <t t-if="prod_ids['ean13_3']">
+                                <span t-esc="res_company.currency_id.symbol"/> 
+                             </t> 
+                            <span t-esc="prod_ids['price3']"/>                    
+                        </div>
+
+                    </div>
                 </div>
             </t>
         </template>

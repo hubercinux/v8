@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, fields, api
+from openerp.exceptions import except_orm, Warning, RedirectWarning
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -25,8 +27,13 @@ class product_barcode_wizard(models.TransientModel):
         datas = {'ids': self._context.get('active_ids')}
         res = self.read(['col','row','qty','start'])
         #_logger.error("PINCKING id1: %r", res)
-        res = res and res[0] or {}  
-        datas['qtys'] = range(1,res['qty']+1,)
+        res = res and res[0] or {} 
+        if res['row'] > 8:
+            raise Warning('La maxima fila ingresada debe ser menor o igual a 8')
+        if res['col'] > 3:
+            raise Warning('La maxima Columna ingresada debe ser menor o igual a 3')
+           
+        #datas['qtys'] = range(1,res['qty']+1,)
         datas['form'] = res
         #_logger.error("PINCKING id2: %r", datas)  
         return self.env['report'].get_action(self, 'product_barcode.report_barcode_print_template', data=datas)
