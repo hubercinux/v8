@@ -10,7 +10,6 @@
                         <field name="doc_type" nolabel="1" colspan="9"/>
                         <field name="doc_number" placeholder="Numero Doc." string="RUC/DNI" nolabel="1" colspan="3" style="width: 150%%" />
                     </group>
-
                 </field>
 
             </field>
