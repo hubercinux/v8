@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+	<data>
+
+        <record model='ir.ui.view' id='view_sale_order_ruc_dni_form'>
+                <field name='name'>sale.order.ruc.dni.form.inherit</field>
+                <field name='model'>sale.order</field>
+                <field name='inherit_id' ref='sale.view_order_form'/>
+                <field name='arch' type='xml'>
+                    <field name="partner_id" position='before'>
+                        <field name="ruc_dni" />
+                	</field>
+                </field>
+        </record>
+
+		<record model='ir.ui.view' id='view_account_invoice_ruc_dni_form'>
+			<field name='name'>account.invoice.ruc.dni.form.inherit</field>
+			<field name='model'>account.invoice</field>
+			<field name='inherit_id' ref='account.invoice_form'/>
+			<field name='arch' type='xml'>
+				<!--
+				<xpath expr="//button[@name='invoice_open']" position="replace">
+                    <button name="invoice_open" states="draft" string="Validate" class="oe_highlight" groups="base.valid_invoice"/>
+                </xpath>
+				-->
+				<field name="partner_id" position='after'>
+					<field name="ruc_dni" />
+					<!-- <field name="fact_ref" attrs="{'invisible':[('type','!=','out_refund')]}"/> -->
+                </field>
+				<field name="fiscal_position" position='attributes'>
+					<attribute name="invisible">1</attribute>
+			    </field>
+				<field name="journal_id" position='replace'/>
+				<field name="partner_id" position='before'>		
+					<field name="journal_id" string="Tipo Documento" on_change="onchange_journal_id(journal_id, context)" widget="selection" domain="[('type','=','sale')]"/>
+                </field>            	
+			</field>
+		</record>
+
+	</data>
+</openerp>
