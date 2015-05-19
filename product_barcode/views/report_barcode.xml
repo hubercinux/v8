@@ -28,7 +28,6 @@
                         </div>
                     </t>
                 -->
-
             
                     <div class="row" style="width:203mm;"  t-foreach="product_details(data)" t-as="prod_ids">
 
@@ -40,7 +39,10 @@
                             <t t-if="prod_ids['ean13_1']">
                                 <span t-esc="res_company.currency_id.symbol"/>
                             </t>
-                            <span t-esc="prod_ids['price1']"/>                       
+                            <span t-esc="prod_ids['price1']"/>
+                            <t t-if="prod_ids['name1']">
+                                <img src="product_barcode/static/logo.png"/> 
+                            </t>            
                         </div>
 
                         <div class="col-xs-4" style="color:#000000;margin-right:2.5mm;width:66mm;height:33.9mm;">
@@ -51,7 +53,11 @@
                             <t t-if="prod_ids['ean13_2']">
                                 <span t-esc="res_company.currency_id.symbol"/>  
                             </t> 
-                            <span t-esc="prod_ids['price2']"/>                                                                            
+                            <span t-esc="prod_ids['price2']"/>
+
+                            <t t-if="prod_ids['name2']">
+                                <img src="product_barcode/static/logo.png"/> 
+                            </t>
                         </div>
                         <div class="col-xs-4" style="color:#000000;width:66mm;height:33.9mm;">
                         <t t-if="prod_ids['ean13_3']">
@@ -61,7 +67,10 @@
                             <t t-if="prod_ids['ean13_3']">
                                 <span t-esc="res_company.currency_id.symbol"/> 
                              </t> 
-                            <span t-esc="prod_ids['price3']"/>                    
+                            <span t-esc="prod_ids['price3']"/>     
+                            <t t-if="prod_ids['name3']">
+                                <img src="product_barcode/static/logo.png"/> 
+                            </t>                 
                         </div>
 
                     </div>
