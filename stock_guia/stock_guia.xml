@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.actions.act_window" id="action_list_stock_guia">
+    		<field name="name">Stock Guia</field>
+			<field name="res_model">stock.guia</field>
+    		<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="menu_stock_guia" parent="stock.menu_stock_configuration" name="Gestion de guias" action="action_list_stock_guia"/>
+		
+		<record model="ir.ui.view" id="view_idea_demo_form">
+			<field name='name'>Stock guia form</field>
+    		<field name="model">stock.guia</field>
+    		<field name="arch" type="xml">
+				<form string="Stock guia form" version="7.0">
+					<header>
+					</header>
+					<sheet>         
+				        <group>
+				        	<group>
+					        	<field name='name'/>
+					        	<field name='warehouse_id'/>				        		
+				        	</group>				        	
+				        	<group>
+				        		<field name='sequence_id' />
+				        	</group>
+					        						        					        	
+				        </group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="view_stock_guia_tree">
+                <field name="name">Stock guia tree</field>
+                <field name="model">stock.guia</field>
+                <field name="arch" type="xml">
+                	<tree string="Stock guia list">
+			    		<field name="name"/>
+			    		<field name="warehouse_id"/>
+					</tree>
+				</field>
+        </record>
+
+		<record model="ir.ui.view" id="view_stock_picking_guia_form">
+	        <field name="name">stock.picking.guia.form</field>
+	        <field name="model">stock.picking</field>
+	        <field name="inherit_id" ref="stock.view_picking_form"/>
+	        <field name="arch" type="xml">
+	        	<field name="partner_id" position="after">
+	        		<field name="guia_id" widget="selection" string="Guia Remision"/>
+	        	</field>
+	        	<field name="picking_type_id" position="after">
+	        		<field name="name_default" string="Nombre defecto"/>
+	        	</field>
+	        </field>
+    	</record>
+
+   </data>
+</openerp>
