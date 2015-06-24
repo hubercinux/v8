@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Es necesario definir este archivo-->
+<templates xml:space="preserve">
+    <!-- t-name: definimos el nombre del template(HomePageTemplate) que sera llamado en pos_demo/static/js/pos_demo.js-->
+    <t t-name="PosdemoHomePage"> 
+        <div class="oe_homepage">
+        	<div class="oe_homepage_left"></div>
+            <div class="oe_homepage_right"></div>        	
+    	</div>
+    </t>
+
+    <t t-name="PosdemoListarRegistro"> 
+        <div class="oe_posdemo_motd">
+        </div>
+    </t>
+
+    <t t-name="listarRegistro"> 
+        <div class="oe_pos_demo_listar">
+            <h3>
+            	<t t-esc="item.name"/>
+            </h3>
+        </div>
+    </t>
+</templates>

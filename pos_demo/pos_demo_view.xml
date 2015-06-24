@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- importando los .css y js del mudulo web -->
+        <template id="assets_backend" name="pos_demo_assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/pos_demo/static/src/css/pos_demo.css"/>
+                <script type="text/javascript" src="/pos_demo/static/src/js/pos_demo.js"/>             
+
+            </xpath>
+        </template>
+
+        <!-- Creando lo menus -->
+        <menuitem id="main_root_pos_demo_menu" name="Pos demo" />
+
+        <menuitem id="pos_demo_menu" name="Pos demo menu" parent="main_root_pos_demo_menu" />
+
+         <!-- Creando la accion que sera llamado en tienda_mascota/static/src/js/tienda_mascota.js mediante tag -->
+        <record id="action_home_page_pos_demo" model="ir.actions.client">
+            <field name="name">Pos demo</field>
+            <field name="tag">pos_demo.paginainicio</field>
+        </record>
+        <menuitem id="home_page_pos_demo_menu" name="Productos FrontEnd" parent="pos_demo_menu" action="action_home_page_pos_demo" sequence="1"/>
+
+
+
+        <!-- ACION  para mostrar el modelo desde el backend -->
+
+        <record model="ir.actions.act_window" id="listar_pos_demo_action">
+            <field name="name">Pos demo action</field>
+            <field name="res_model">pos.demo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Cree el primer producto</p>
+            </field>
+        </record>    
+
+        <menuitem id="lista_pos_demo_backend_menu" name="Productos BackEnd" parent="pos_demo_menu" action="listar_pos_demo_action" sequence="2"/>
+
+        <record model="ir.ui.view" id="view_pos_demo_tree">
+            <field name="name">Pos.demo.list</field>
+            <field name="model">pos.demo</field>
+            <field name="arch" type="xml">
+                <tree string="pos demo list">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_pos_demo_form">
+            <field name='name'>Pos.demo.form</field>
+            <field name="model">pos.demo</field>
+            <field name="arch" type="xml">
+                <form string="Pos demo form" version="7.0">
+                    <sheet>
+                        <div>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <notebook colspan="4">
+                            <page string="Description">
+                                <field name="descripcion"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+      
+    </data>
+</openerp>
