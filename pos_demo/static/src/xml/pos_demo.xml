@@ -15,7 +15,7 @@
     </t>
 
     <t t-name="listarRegistro"> 
-        <div class="oe_pos_demo_listar">
+        <div class="oe_pos_demo_listar" t-att-data-id="item.id">
             <h3>
             	<t t-esc="item.name"/>
             </h3>

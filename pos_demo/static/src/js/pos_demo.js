@@ -10,10 +10,22 @@ openerp.pos_demo = function(instance, local) {
     //Construimos un widget basico de nombre PaginaPrincipal
     local.PaginaPrincipal = instance.Widget.extend({
         template: 'PosdemoHomePage',
+        events: {
+        'click .oe_pos_demo_listar': 'selected_item',
+        },
         start: function() {
             return new local.PosdemoListarRegistro(this).appendTo(this.$('.oe_homepage_left'));
             
-         },
+        },
+        selected_item: function (event) {
+        this.do_action({
+            type: 'ir.actions.act_window',
+            res_model: 'pos.demo',
+            res_id: $(event.currentTarget).data('id'),
+            views: [[false, 'form']],
+            target: 'current',
+        });
+    },
     });
 
     //Registra nuestro widget básico como una acción cliente que sera llamado desde la accion creado en  pos_demo/pos_demo_view.xml
