@@ -4,8 +4,12 @@
         <!-- importando los .css y js del mudulo web -->
         <template id="assets_backend" name="pos_demo_assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/pos_demo/static/lib/ext-theme-classic/build/resources/ext-theme-classic-all.css"/>
+                <script type="text/javascript" src="/pos_demo/static/lib/ext-all-debug.js"/>                         
+                <script type="text/javascript" src="/pos_demo/static/lib/ext-theme-classic/build/ext-theme-classic.js"/> 
+
                 <link rel="stylesheet" href="/pos_demo/static/src/css/pos_demo.css"/>
-                <script type="text/javascript" src="/pos_demo/static/src/js/pos_demo.js"/>             
+                <script type="text/javascript" src="/pos_demo/static/src/js/pos_demo.js"/> 
 
             </xpath>
         </template>

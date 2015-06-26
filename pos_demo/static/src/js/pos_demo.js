@@ -11,7 +11,101 @@ openerp.pos_demo = function(instance, local) {
     local.PaginaPrincipal = instance.Widget.extend({
         template: 'PosdemoHomePage',
         start: function() {
-            return new local.PosdemoListarRegistro(this).appendTo(this.$('.oe_homepage_left'));
+
+
+            /*
+            Ext.create('Ext.Panel', {
+             renderTo     : 'oe_homepage_extjs',
+             width        : 200,
+             height       : 150,
+             bodyPadding  : 5,
+             title        : 'Integrando Odoo y Extjs',
+             html         : 'Hola <b>Bienvenido a la Inovacion!</b>...'
+            });
+            */
+
+
+            /*
+            Ext.widget({
+                renderTo : 'oe_homepage_extjs',
+                xtype    : 'grid',
+                title    : 'Lista de usuarios',
+                width    : 650,
+                height   : 300,
+                plugins  : 'rowediting',
+                store    : {
+                    fields : [ 'name', 'age', 'votes', 'credits' ],
+                    data   : [
+                        [ 'Javier', 35, 10, 427 ],
+                        [ 'Huber', 22, 4, 42 ]
+                    ]
+                },
+                columns: {
+                    defaults: {
+                        editor : 'numberfield',
+                        width  : 120
+                    },
+                    items: [
+                        { text: 'Nombre', dataIndex: 'name', flex: 1, editor: 'textfield' },
+                        { text: 'Edad', dataIndex: 'age' },
+                        { text: 'Votos', dataIndex: 'votes' },
+                        { text: 'Creditos', dataIndex: 'credits' }
+                    ]
+                }
+            });
+            */
+
+            Ext.define('User', {
+                extend: 'Ext.data.Model',
+                fields: [ 'name', 'email', 'phone' ]
+            });
+            var userStore = Ext.create('Ext.data.Store', {
+                model: 'User',
+                data: [
+                    { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
+                    { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
+                    { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
+                    { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+                ]
+            });
+            Ext.create('Ext.grid.Panel', {
+                renderTo: 'oe_homepage_extjs',
+                store: userStore,
+                width: 600,
+                height: 200,
+                selType: 'cellmodel',
+                plugins: [
+                    new Ext.grid.plugin.CellEditing({
+                    clicksToEdit: 1
+                    })
+                    ],
+                title: 'Application Users',
+                columns: [
+                    {
+                        text: 'Name',
+                        width: 100,
+                        sortable: false,
+                        hideable: false,
+                        dataIndex: 'name',
+                        editor: 'textfield',
+                    },
+                    {
+                        text: 'Email Address',
+                        width: 150,
+                        dataIndex: 'email',
+                        hidden: true,
+                        editor: 'textfield',
+                    },
+                    {
+                        text: 'Phone Number',
+                        flex: 1,
+                        dataIndex: 'phone',
+                        editor: 'textfield'
+                    }
+                ]
+            });
+
+           //return new local.PosdemoListarRegistro(this).appendTo(this.$('.oe_homepage_left'));
             
          },
     });
