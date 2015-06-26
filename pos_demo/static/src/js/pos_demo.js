@@ -107,7 +107,8 @@ openerp.pos_demo = function(instance, local) {
                     }
                 ]
             });
-
+            
+            /*Comentado para evitar mostrar el Widget PaginaPrincipal en la pagina de Inicio*/
            //return new local.PosdemoListarRegistro(this).appendTo(this.$('.oe_homepage_left'));
             
         },

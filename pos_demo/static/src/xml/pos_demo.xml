@@ -4,7 +4,7 @@
     <!-- t-name: definimos el nombre del template(HomePageTemplate) que sera llamado en pos_demo/static/js/pos_demo.js-->
     <t t-name="PosdemoHomePage"> 
         <div class="oe_homepage">
-            <div id="oe_homepage_extjs"></div>
+            <div id="oe_homepage_extjs"></div> <!-- Añadido para mostrar Extjs-->
         	<div class="oe_homepage_left"></div>
             <div class="oe_homepage_right"></div>        	
     	</div>
