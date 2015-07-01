@@ -13,6 +13,7 @@ openerp.pos_demo = function(instance, local) {
         events: {
         'click .oe_pos_demo_listar': 'selected_item',
         },
+        
         start: function() {
 
 
@@ -27,15 +28,20 @@ openerp.pos_demo = function(instance, local) {
             });
             */
 
-
             /*
+            
             Ext.widget({
                 renderTo : 'oe_homepage_extjs',
                 xtype    : 'grid',
                 title    : 'Lista de usuarios',
                 width    : 650,
                 height   : 300,
-                plugins  : 'rowediting',
+                //plugins  : 'rowediting',
+                plugins: [
+                    new Ext.grid.plugin.CellEditing({
+                    clicksToEdit: 1
+                    })
+                    ],
                 store    : {
                     fields : [ 'name', 'age', 'votes', 'credits' ],
                     data   : [
@@ -58,12 +64,13 @@ openerp.pos_demo = function(instance, local) {
             });
             */
 
-            Ext.define('User', {
+            /* sale errores
+            Ext.define('UserDB', {
                 extend: 'Ext.data.Model',
                 fields: [ 'name', 'email', 'phone' ]
             });
             var userStore = Ext.create('Ext.data.Store', {
-                model: 'User',
+                model: 'UserDB',
                 data: [
                     { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
                     { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
@@ -105,22 +112,27 @@ openerp.pos_demo = function(instance, local) {
                         dataIndex: 'phone',
                         editor: 'textfield'
                     }
-                ]
+                ],
             });
+
+            fin sale errores*/
             
             /*Comentado para evitar mostrar el Widget PaginaPrincipal en la pagina de Inicio*/
-           //return new local.PosdemoListarRegistro(this).appendTo(this.$('.oe_homepage_left'));
+           return new local.PosdemoListarRegistro(this).appendTo(this.$('.oe_homepage_left'));
             
         },
+
+        
         selected_item: function (event) {
-        this.do_action({
-            type: 'ir.actions.act_window',
-            res_model: 'pos.demo',
-            res_id: $(event.currentTarget).data('id'),
-            views: [[false, 'form']],
-            target: 'current',
-        });
-    },
+            this.do_action({
+                type: 'ir.actions.act_window',
+                res_model: 'pos.demo',
+                res_id: $(event.currentTarget).data('id'),
+                views: [[false, 'form']],
+                target: 'current',
+            });        
+        },
+        
     });
 
     //Registra nuestro widget básico como una acción cliente que sera llamado desde la accion creado en  pos_demo/pos_demo_view.xml
@@ -138,6 +150,7 @@ openerp.pos_demo = function(instance, local) {
                     _(results).each(function (item) {
                         self.$el.append(QWeb.render("listarRegistro", {item: item}));
                         //self.$(".listRegistro").text(item.name);
+                        
                     });
                 });
 
