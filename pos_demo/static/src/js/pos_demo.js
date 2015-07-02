@@ -11,7 +11,7 @@ openerp.pos_demo = function(instance, local) {
     local.PaginaPrincipal = instance.Widget.extend({
         template: 'PosdemoHomePage',
         events: {
-        'click .oe_pos_demo_listar': 'selected_item',
+        'click .oe_pos_demo_listar': 'print_consola',
         },
         
         start: function() {
@@ -122,7 +122,7 @@ openerp.pos_demo = function(instance, local) {
             
         },
 
-        
+        /*
         selected_item: function (event) {
             this.do_action({
                 type: 'ir.actions.act_window',
@@ -131,6 +131,21 @@ openerp.pos_demo = function(instance, local) {
                 views: [[false, 'form']],
                 target: 'current',
             });        
+        },
+        */
+
+        print_consola: function(){
+            var self = this;
+            var vals = {'name': 'Javier Huber'};
+            console.log(vals['name']);
+            /*
+            if (is_src_dst){
+                vals = {'location_id': loc_id};
+            }
+            return new instance.web.Model('stock.pack.operation').call('write',[op_id, vals]).then(function(){
+                    return self.refresh_ui(self.picking.id);
+                });
+            */
         },
         
     });
