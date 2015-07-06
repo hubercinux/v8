@@ -11,7 +11,8 @@ openerp.pos_demo = function(instance, local) {
     local.PaginaPrincipal = instance.Widget.extend({
         template: 'PosdemoHomePage',
         events: {
-        'click .oe_pos_demo_listar': 'selected_item',
+        'dblclick .oe_pos_demo_listar': 'selected_item',
+        'click .oe_pos_demo_listar': 'selected_item1',
         },
         
         start: function() {
@@ -132,6 +133,15 @@ openerp.pos_demo = function(instance, local) {
                 target: 'current',
             });        
         },
+
+        selected_item1: function (event) {
+            var self = this;
+            var model =  new instance.web.Model("pos_demo.pos_demo");
+            model.call('confirmar', {context: new instance.web.CompoundContext()}).then(function(result) {
+            self.$el.append("<div>Hello " + result["hola"] + "</div>");
+            // will show "Hello world" to the user
+            });      
+        },    
         
     });
 
@@ -150,7 +160,7 @@ openerp.pos_demo = function(instance, local) {
                     _(results).each(function (item) {
                         self.$el.append(QWeb.render("listarRegistro", {item: item}));
                         //self.$(".listRegistro").text(item.name);
-                        
+                        //console.log(item);
                     });
                 });
 

@@ -6,3 +6,9 @@ class pos_demo(models.Model):
    
     name = fields.Char(string='Producto')
     descripcion = fields.Text(string='Descripcion')
+
+    @api.one
+    def confirmar(self):        
+        _logger.error("PINCKING id1: %r", self) 
+        #self.write({'state': 'done' })
+        return {'hola':Mundo}
