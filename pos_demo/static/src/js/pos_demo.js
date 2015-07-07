@@ -11,7 +11,8 @@ openerp.pos_demo = function(instance, local) {
     local.PaginaPrincipal = instance.Widget.extend({
         template: 'PosdemoHomePage',
         events: {
-        'dblclick .oe_pos_demo_listar': 'selected_item',
+        //'dblclick .oe_pos_demo_listar': 'selected_item',
+        'dblclick .oe_pos_demo_editar': 'edit_item',
         },
         
         start: function() {
@@ -122,7 +123,6 @@ openerp.pos_demo = function(instance, local) {
             
         },
 
-        
         selected_item: function (event) {
             this.do_action({
                 type: 'ir.actions.act_window',
@@ -131,6 +131,32 @@ openerp.pos_demo = function(instance, local) {
                 views: [[false, 'form']],
                 target: 'current',
             });        
+
+        },        
+
+        edit_item: function(event){
+            var self = this;
+            var text = $(event.currentTarget).text();
+            var text1 = text.trim();
+            $(event.currentTarget).html('<input type="text" name="name" value="'+text1+'">').find('input').focus();
+            $(event.currentTarget).keypress( function(e){
+                        if(e.keyCode == 13){
+                            var text = $('input', this).val();
+                            var demo_id = $(event.currentTarget).data('id');
+                            var vals = {'name': text};
+                            var model = new instance.web.Model('pos.demo');
+                            model.call('write',[demo_id,vals],{context: new instance.web.CompoundContext()});
+                            $(this).html( text );
+                        }});
+
+            console.log(text1);
+            //var model = new instance.web.Model('pos.demo');
+            //var demo_id = $(event.currentTarget).data('id')
+            //var vals = {'name':'JUAN','descripcion': 'HOLA MUNDO'}
+            //model.call('create',[vals],{context: new instance.web.CompoundContext()}).then(function(){
+                    //return self.refresh_ui(self.picking.id);
+                    //console.log($(event.currentTarget).data('id'))
+                //});            
         },
         
     });
@@ -150,7 +176,7 @@ openerp.pos_demo = function(instance, local) {
                     _(results).each(function (item) {
                         self.$el.append(QWeb.render("listarRegistro", {item: item}));
                         //self.$(".listRegistro").text(item.name);
-                        console.log(item);
+                        //console.log(item);
                     });
                 });
 

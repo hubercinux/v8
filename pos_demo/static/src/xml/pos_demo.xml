@@ -16,10 +16,12 @@
     </t>
 
     <t t-name="listarRegistro"> 
-        <div class="oe_pos_demo_listar" t-att-data-id="item.id">
-            <h3>
+        <div class="oe_pos_demo_listar" >
+            <h4>
+                <div class="oe_pos_demo_editar" t-att-data-id="item.id">
             	<t t-esc="item.name"/>
-            </h3>
+                </div>
+            </h4>
         </div>
     </t>
 </templates>
