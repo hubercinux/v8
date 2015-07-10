@@ -12,7 +12,9 @@ openerp.pos_demo = function(instance, local) {
         template: 'PosdemoHomePage',
         events: {
         //'dblclick .oe_pos_demo_listar': 'selected_item',
-        'dblclick .oe_pos_demo_editar': 'edit_item',
+        'dblclick .oe_pos_demo_editar': 'edit_item_line',
+        'click .edit': 'edit_item_detail',
+        'click button': 'actualizar_item',
         },
         
         start: function() {
@@ -116,8 +118,7 @@ openerp.pos_demo = function(instance, local) {
                 ],
             });
 
-            fin sale errores*/
-            
+            fin sale errores*/            
             /*Comentado para evitar mostrar el Widget PaginaPrincipal en la pagina de Inicio*/
            return new local.PosdemoListarRegistro(this).appendTo(this.$('.oe_homepage_left'));
             
@@ -131,13 +132,13 @@ openerp.pos_demo = function(instance, local) {
                 views: [[false, 'form']],
                 target: 'current',
             });        
-
         },        
 
-        edit_item: function(event){
+        edit_item_line: function(event){
             var self = this;
             var text = $(event.currentTarget).text();
             var text1 = text.trim();
+            console.log(this);
             $(event.currentTarget).html('<input type="text" name="name" value="'+text1+'">').find('input').focus();
             $(event.currentTarget).keypress( function(e){
                         if(e.keyCode == 13){
@@ -158,6 +159,40 @@ openerp.pos_demo = function(instance, local) {
                     //console.log($(event.currentTarget).data('id'))
                 //});            
         },
+
+        edit_item_detail: function(event){
+            var self = this;         
+            var demo_id = $(event.currentTarget).data('id');
+            var model = new instance.web.Model('pos.demo');
+
+            /*no funionca
+            model.query(['name','descripcion']).filter([['id','=',demo_id]]).all().then(function(result) {
+                    //self.$(".oe_pos_demo_editar_detail").text(result.name);
+                    console.log(result.name); 
+                });
+
+            */
+            model.call('search', [[['id','=',demo_id]]], {limit: 15}).then(function (ids) {   
+                //console.log(ids[0]);             
+                return model.call('read', [ids[0], ['id','name', 'descripcion']]);
+            }).then(function (result) {
+                //console.log(result.name);
+                //self.$(".oe_pos_demo_editar_detail").text(result.name);
+                $( 'div' ).remove( '.oe_homepage_left' );
+                $( 'div' ).remove( '.oe_homepage_right' );
+                self.$el.append(QWeb.render("EditarRegistro",{registro: result})); 
+            });                                
+        },
+
+        actualizar_item: function (event) {    
+            var text = $('input').val();
+            console.log(text);    
+            //var demo_id = $(event.currentTarget).data('id');
+            //var vals = {'name': text};
+            //var model = new instance.web.Model('pos.demo');
+            //model.call('write',[demo_id,vals],{context: new instance.web.CompoundContext()});
+        },
+
         
     });
 
