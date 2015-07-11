@@ -12,7 +12,7 @@ openerp.pos_demo = function(instance, local) {
         template: 'PosdemoHomePage',
         events: {
         //'dblclick .oe_pos_demo_listar': 'selected_item',
-        'dblclick .oe_pos_demo_editar': 'edit_item_line',
+        'dblclick .oe_pos_demo_editar_name': 'edit_item_line',
         'click .edit': 'edit_item_detail',
         'click button': 'actualizar_item',
         },
@@ -198,10 +198,11 @@ openerp.pos_demo = function(instance, local) {
             //    self.start();
             //});
             var listar = new local.PosdemoListarRegistro(this);
-            $( 'div' ).remove( '.oe_pos_demo_listar' );
+            $( 'div' ).remove( '.oe_pos_demo_editar' );
+            self.$el.append("<div class='oe_homepage_left'></div>");
             return new instance.web.Model("pos.demo").query(['name','descripcion']).order_by('-create_date', '-id').all().then(function(results) {
-                    _(results).each(function (item) {
-                        self.$el.append(QWeb.render("listarRegistro", {item: item}));
+                    _(results).each(function (item) {                        
+                        self.$('.oe_homepage_left').append(QWeb.render("listarRegistro", {item: item}));
                     });
             });           
 
@@ -214,7 +215,7 @@ openerp.pos_demo = function(instance, local) {
     instance.web.client_actions.add('pos_demo.paginainicio', 'instance.pos_demo.PaginaPrincipal');
 
     local.PosdemoListarRegistro = instance.Widget.extend({
-        template: 'PosdemoListarRegistro',
+        //template: 'PosdemoListarRegistro',
         start: function() {
             var self = this;
             return new instance.web.Model("pos.demo")
