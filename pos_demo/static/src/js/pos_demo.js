@@ -184,13 +184,27 @@ openerp.pos_demo = function(instance, local) {
             });                                
         },
 
-        actualizar_item: function (event) {    
+        actualizar_item: function (event) { 
+            var self = this;
             var text = $('input').val();
-            console.log(text);    
-            //var demo_id = $(event.currentTarget).data('id');
-            //var vals = {'name': text};
-            //var model = new instance.web.Model('pos.demo');
-            //model.call('write',[demo_id,vals],{context: new instance.web.CompoundContext()});
+            var textarea = $('textarea').val();            
+            var demo_id = $(event.currentTarget).data('id');
+            var vals = {'name': text, 'descripcion': textarea};
+            var model = new instance.web.Model('pos.demo');
+            model.call('write',[demo_id,vals],{context: new instance.web.CompoundContext()});
+            //.then(function(){
+                //return new local.PosdemoListarRegistro(this).appendTo(this.$('.oe_homepage_left'));
+            //    console.log(self);  
+            //    self.start();
+            //});
+            var listar = new local.PosdemoListarRegistro(this);
+            $( 'div' ).remove( '.oe_pos_demo_listar' );
+            return new instance.web.Model("pos.demo").query(['name','descripcion']).order_by('-create_date', '-id').all().then(function(results) {
+                    _(results).each(function (item) {
+                        self.$el.append(QWeb.render("listarRegistro", {item: item}));
+                    });
+            });           
+
         },
 
         
@@ -212,6 +226,7 @@ openerp.pos_demo = function(instance, local) {
                         self.$el.append(QWeb.render("listarRegistro", {item: item}));
                         //self.$(".listRegistro").text(item.name);
                         //console.log(item);
+
                     });
                 });
 
