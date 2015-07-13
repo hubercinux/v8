@@ -14,7 +14,8 @@ openerp.pos_demo = function(instance, local) {
         //'dblclick .oe_pos_demo_listar': 'selected_item',
         'dblclick .oe_pos_demo_editar_name': 'edit_item_line',
         'click .edit': 'edit_item_detail',
-        'click button': 'actualizar_item',
+        'click button': 'update_item',
+        'click .new_item': 'new_item',
         },
         
         start: function() {
@@ -173,7 +174,6 @@ openerp.pos_demo = function(instance, local) {
 
             */
             model.call('search', [[['id','=',demo_id]]], {limit: 15}).then(function (ids) {   
-                //console.log(ids[0]);             
                 return model.call('read', [ids[0], ['id','name', 'descripcion']]);
             }).then(function (result) {
                 //console.log(result.name);
@@ -184,29 +184,49 @@ openerp.pos_demo = function(instance, local) {
             });                                
         },
 
-        actualizar_item: function (event) { 
+        update_item: function (event) { 
             var self = this;
             var text = $('input').val();
             var textarea = $('textarea').val();            
             var demo_id = $(event.currentTarget).data('id');
+            console.log(text); 
             var vals = {'name': text, 'descripcion': textarea};
             var model = new instance.web.Model('pos.demo');
-            model.call('write',[demo_id,vals],{context: new instance.web.CompoundContext()});
+            if (demo_id) { 
+                model.call('write',[demo_id,vals],{context: new instance.web.CompoundContext()});
+                $( 'div' ).remove( '.oe_pos_demo_editar' );
+            }else{
+                console.log('Nuevo');     
+                model.call('create',[vals],{context: new instance.web.CompoundContext()});
+                $( 'div' ).remove( '.oe_pos_demo_new' );
+            }
+
             //.then(function(){
                 //return new local.PosdemoListarRegistro(this).appendTo(this.$('.oe_homepage_left'));
             //    console.log(self);  
             //    self.start();
             //});
-            var listar = new local.PosdemoListarRegistro(this);
-            $( 'div' ).remove( '.oe_pos_demo_editar' );
-            self.$el.append("<div class='oe_homepage_left'></div>");
+            var listar = new local.PosdemoListarRegistro(this);                        
+            self.$el.append(
+                "<div class='oe_homepage_left'>
+                    <a  class='new_item'><img src='/pos_demo/static/src/img/nuevo.png' width='20px'/>
+                    </a>  
+                </div></div>");
             return new instance.web.Model("pos.demo").query(['name','descripcion']).order_by('-create_date', '-id').all().then(function(results) {
                     _(results).each(function (item) {                        
                         self.$('.oe_homepage_left').append(QWeb.render("listarRegistro", {item: item}));
                     });
-            });           
-
+            });          
         },
+        
+        new_item: function (event) { 
+            var self = this;
+            console.log(event);
+            $( 'div' ).remove( '.oe_homepage_left' );
+            $( 'div' ).remove( '.oe_homepage_right' );
+            self.$el.append(QWeb.render("NewRegistro"));
+
+        },        
 
         
     });

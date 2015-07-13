@@ -6,7 +6,7 @@
         <div class="oe_homepage">
             <div id="oe_homepage_extjs"></div> <!-- Añadido para mostrar Extjs-->
         	<div class="oe_homepage_left">
-            <a><img src='/pos_demo/static/src/img/nuevo.png' width="20px"/></a>  
+            <a  class="new_item"><img src='/pos_demo/static/src/img/nuevo.png' width="20px"/></a>  
             </div>
             <div class="oe_homepage_right"></div>        	
     	</div>
@@ -32,7 +32,18 @@
             </h4>
             <button type="button" t-att-data-id="registro.id">Actualizar</button>
         </div>
-    </t>    
+    </t> 
+
+    <t t-name="NewRegistro">
+        <div class="oe_pos_demo_new" >
+            <h4>
+                Nombre: <input type="text"/>
+                <br/>
+                Descripcion: <br/><textarea rows="4" cols="50"></textarea>
+            </h4>
+            <button type="button">Actualizar</button>
+        </div>
+    </t>       
 
 
 </templates>
