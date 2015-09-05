@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="location_ajuste_inventario" model="stock.location">
+			<field name="name">AJUSTE DE INVENTARIO</field>
+			<field name="location_id" ref="stock.stock_location_locations_virtual"/>
+			<field name="usage">ajuste</field>
+		</record>
+
+	</data>
+</openerp>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="view_stock_ajuste_tree">
+            <field name="name">view.stock.ajuste.tree</field>
+            <field name="model">stock.ajuste</field>
+            <field name="arch" type="xml">
+                <tree string="Listar de registro">
+                   <field name="name"/>
+                   <field name="description"/>
+                   <field name="concepto"/>
+                   <field name="date"/>
+                   <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+		<record model="ir.ui.view" id="stock_ajuste_form_view">
+			<field name="name">stock.ajuste.form</field>
+			<field name="model">stock.ajuste</field>
+			<field name="arch" type="xml">
+				<form string="Ajuste de Inventario">
+					<header>
+						<button name="button_validar" string="Procesar Ajuste" type="object" states="draft" class="oe_highlight"/>
+						<button name="button_cancel" string="Cancelar" type="object" states="draft,done"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,done,cancel" statusbar_colors="{'waiting_date':'blue'}"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<h1><field name="name" class="oe_inline" readonly='1'/></h1>
+						</div>
+						<group col="6">
+							<group colspan="4">
+								<field name="description"/>
+								<field name="concepto"/>
+								<field name="location_dest_id" domain="[('usage','=','internal')]" help="Ubicación donde se realizará el ajuste"/>
+							</group>
+							<group colspan="2">
+								<field name="date"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Productos para ajuste">
+								<field name="ajuste_line_ids" readonly='0'>
+									<tree string="Componetes" editable="botton">
+										<field name="product_id"/>
+										<field name="product_uom_qty"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Movimientos">
+								<field name="move_line_ids" readonly='0'>
+									<field name="product_id"/>
+									<field name="product_uom_qty"/>
+									<field name="location_dest_id"/>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="stock_ajuste_tree_action">
+			<field name="name">Ajuste de inventario</field>
+			<field name="res_model">stock.ajuste</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Crea el primer ajuste de inventario</p>
+			</field>
+		</record>
+
+		<menuitem parent="stock.menu_stock_inventory_control" action="stock_ajuste_tree_action" id="stock_ajuste_menu" sequence="40" name="Ajustar inventario"/>
+	</data>
+</openerp>

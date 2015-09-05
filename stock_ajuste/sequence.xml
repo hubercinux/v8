@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="seq_type_ajuste_inventory" model="ir.sequence.type">
+			<field name="name">AJUSTE DE INVENTARIO</field>
+			<field name="code">ajuste.inventario</field>
+		</record>
+
+		<record id="seq_ajuste_inventario" model="ir.sequence">
+			<field name="name">SECUENCIA AJUSTE DE INVENTARIO</field>
+			<field name="code">ajuste.inventario</field>
+			<field name="prefix">AI/%(year)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+			<field name="implementation">no_gap</field>
+		</record>
+
+	</data>
+</openerp>
